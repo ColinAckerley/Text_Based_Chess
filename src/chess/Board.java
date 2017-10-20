@@ -41,8 +41,6 @@ public class Board
 	
 	
 	
-	
-	
 	for (int m = 0; m < 8; m++) {
 		
 		board[6][m] = new Pawn("w");
