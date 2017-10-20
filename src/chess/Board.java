@@ -1,8 +1,25 @@
 package chess;
-
 public class Board
 {
-	public static void main(String[] args)
+	void drawBoard()
 	{
+	}
+	void checkStatus()
+	{
+	}
+	void printBoard()
+	{
+	}
+	boolean inCheckmate()
+	{
+		return false;
+	}
+	boolean inCheck()
+	{
+		return false;
+	}
+	Pawn checkPromotion()
+	{
+		return null;
 	}
 }
