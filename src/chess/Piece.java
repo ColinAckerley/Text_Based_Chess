@@ -1,17 +1,7 @@
 package chess;
-public class Piece
+public abstract class Piece
 {
 	String color;
-	boolean checkMoveValidity(String origin, String dest)
-	{
-		return false;
-	}
-	String move(String origin, String dest)
-	{
-		return "";
-	}
-	public String toString()
-	{
-		return "";
-	}
+	abstract boolean checkMoveValidity(String origin, String dest);
+	abstract String move(String origin, String dest);
 }
