@@ -18,4 +18,10 @@ public class Pawn extends Piece
 	{
 		return null;
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wp";
+		return "bp";
+	}
 }

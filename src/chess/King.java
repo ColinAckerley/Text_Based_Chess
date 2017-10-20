@@ -14,4 +14,10 @@ public class King extends Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wK";
+		return "bK";
+	}
 }

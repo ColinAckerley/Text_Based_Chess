@@ -14,4 +14,10 @@ public class Knight extends Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wN";
+		return "bN";
+	}
 }

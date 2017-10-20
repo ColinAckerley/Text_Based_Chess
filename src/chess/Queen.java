@@ -14,4 +14,10 @@ public class Queen extends Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wQ";
+		return "bQ";
+	}
 }

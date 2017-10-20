@@ -10,4 +10,8 @@ public class Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		return "";
+	}
 }

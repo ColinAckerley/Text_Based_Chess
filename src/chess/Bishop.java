@@ -14,4 +14,10 @@ public class Bishop extends Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wB";
+		return "bB";
+	}
 }

@@ -14,4 +14,10 @@ public class Rook extends Piece
 	{
 		return "";
 	}
+	public String getName()
+	{
+		if(color.equals("w"))
+			return "wR";
+		return "bR";
+	}
 }
