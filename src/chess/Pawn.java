@@ -2,6 +2,7 @@ package chess;
 public class Pawn extends Piece
 {
 	String color;
+	boolean firstMove = false;
 	public Pawn(String color)
 	{
 		this.color = color;
