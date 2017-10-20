@@ -1,6 +1,10 @@
 package chess;
 public class Board
 {
+	void drawInitBoard()
+	{
+		
+	}
 	void drawBoard()
 	{
 	}
@@ -9,6 +13,7 @@ public class Board
 	}
 	void printBoard()
 	{
+		System.out.print("Hello World");
 	}
 	boolean inCheckmate()
 	{

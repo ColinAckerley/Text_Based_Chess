@@ -10,7 +10,7 @@ public class Piece
 	{
 		return "";
 	}
-	public String getName()
+	public String toString()
 	{
 		return "";
 	}

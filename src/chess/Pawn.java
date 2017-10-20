@@ -18,7 +18,7 @@ public class Pawn extends Piece
 	{
 		return null;
 	}
-	public String getName()
+	public String toString()
 	{
 		if(color.equals("w"))
 			return "wp";
