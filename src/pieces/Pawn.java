@@ -14,6 +14,12 @@ public class Pawn extends Piece
 	{
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
+		
+		
+		if (!b.pathFree(curRow, curCol, newRow, newCol)) {
+			return false;}
+		
+		
 		if(color == "Black")
 		{
 			if(newRow <= curRow || colDiff > 1)
