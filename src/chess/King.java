@@ -10,10 +10,6 @@ public class King extends Piece
 	{
 		return false;
 	}
-	String move(String origin, String dest)
-	{
-		return "";
-	}
 	public String getColor()
 	{
 		return this.color;

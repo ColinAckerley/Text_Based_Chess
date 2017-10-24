@@ -8,11 +8,9 @@ public class Queen extends Piece
 	}
 	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
 	{
+		// Combines functionality of bishop + rook
+		// possibly patch these two pieces' checkMoveValidity methods
 		return false;
-	}
-	String move(String origin, String dest)
-	{
-		return "";
 	}
 	public String getColor()
 	{
