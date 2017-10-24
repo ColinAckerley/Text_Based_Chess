@@ -1,4 +1,7 @@
-package chess;
+package pieces;
+
+import chess.Board;
+
 public class King extends Piece
 {
 	String color;
@@ -17,8 +20,6 @@ public class King extends Piece
 		if(!b.pathFree(curRow, curCol, newRow, newCol))
 			return false;
 		if(colDiff > 1 || rowDiff > 1)
-			return false;
-		if(newRow < 0 || newRow > b.SIZE || newCol < 0 || newCol> b.SIZE)
 			return false;
 		return true;
 	}
