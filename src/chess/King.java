@@ -18,8 +18,6 @@ public class King extends Piece
 			return false;
 		if(colDiff > 1 || rowDiff > 1)
 			return false;
-		if(newRow < 0 || newRow > b.SIZE || newCol < 0 || newCol> b.SIZE)
-			return false;
 		return true;
 	}
 	public String getColor()
