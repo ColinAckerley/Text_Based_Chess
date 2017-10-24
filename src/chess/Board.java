@@ -97,7 +97,4 @@ public class Board
 		b.initBoard();
 		b.printBoard();
 	}
-	
-	
-	
 }

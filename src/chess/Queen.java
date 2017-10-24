@@ -8,7 +8,10 @@ public class Queen extends Piece
 	}
 	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
-		if(new Rook(color).checkMoveValidity(b, curRow, curCol, newRow, newCol) || new Bishop(color).checkMoveValidity(b, curRow, curCol, newRow, newCol))
+		if(
+			new Rook(color).checkMoveValidity(b, curRow, curCol, newRow, newCol)
+					|| new Bishop(color).checkMoveValidity(b, curRow, curCol, newRow, newCol)
+		)
 			return true;
 		return false;
 	}

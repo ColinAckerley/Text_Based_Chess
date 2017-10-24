@@ -8,11 +8,12 @@ public class Rook extends Piece
 	}
 	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
-		// 'dest' must be in same row or same column as origin
-		// if attempted to move diagonally arraywise, return false
-		// else, check straight lines row or column wise to 'dest' and path
-		// should be either empty space or hashtag, excluding 'dest' itself
-		// if 'dest' is taken by a piece, return true
+		int rowDiff = Math.abs(curRow - newRow);
+		int colDiff = Math.abs(curCol - newCol);
+		if(rowDiff != 0 && colDiff == 0)
+			return true;
+		if(colDiff != 0 && rowDiff == 0)
+			return true;
 		return false;
 	}
 	public String getColor()
