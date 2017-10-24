@@ -31,9 +31,6 @@ public class Pawn extends Piece {
 				return false;
 			}
 			
-			
-			
-			
 
 		}
 
@@ -57,19 +54,16 @@ public class Pawn extends Piece {
 
 		}
 
-
-		return false;
+		if (colDiff == 1) {
+		
+		return b.checkPawnDiag(curRow, curCol, newRow, newCol);
+		
+		}
+		
+		
+		return true;
 	}
 
-	Queen promote(String location, Pawn p) {
-		Queen q = new Queen(color);
-		// Cannot cast Pawn to Queen. Will need to create new Queen and give the
-		// last known location of pawn
-		// Queen will either be in board[0][j] or board[7][j]
-		// MAIN CHALLENGE: Removing pawn from board and giving Queen pawn's last
-		// location
-		return null;
-	}
 
 	public String getColor() {
 		return this.color;
