@@ -1,8 +1,11 @@
-package chess;
-public class Bishop extends Piece
+package pieces;
+
+import chess.Board;
+
+public class Knight extends Piece
 {
 	String color;
-	public Bishop(String color)
+	public Knight(String color)
 	{
 		this.color = color;
 	}
@@ -10,9 +13,9 @@ public class Bishop extends Piece
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
-		if(!b.pathFree(curRow, curCol, newRow, newCol))
-			return false;
-		if(rowDiff == colDiff)
+		if(rowDiff == 2 && colDiff == 1)
+			return true;
+		if(rowDiff == 1 && colDiff == 2)
 			return true;
 		return false;
 	}
@@ -22,6 +25,6 @@ public class Bishop extends Piece
 	}
 	public String toString()
 	{
-		return color.charAt(0) + "B";
+		return color.charAt(0) + "N";
 	}
 }

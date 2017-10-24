@@ -1,8 +1,11 @@
-package chess;
-public class Rook extends Piece
+package pieces;
+
+import chess.Board;
+
+public class Bishop extends Piece
 {
 	String color;
-	public Rook(String color)
+	public Bishop(String color)
 	{
 		this.color = color;
 	}
@@ -10,9 +13,9 @@ public class Rook extends Piece
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
-		if(rowDiff != 0 && colDiff == 0)
-			return true;
-		if(colDiff != 0 && rowDiff == 0)
+		if(!b.pathFree(curRow, curCol, newRow, newCol))
+			return false;
+		if(rowDiff == colDiff)
 			return true;
 		return false;
 	}
@@ -22,6 +25,6 @@ public class Rook extends Piece
 	}
 	public String toString()
 	{
-		return color.charAt(0) + "R";
+		return color.charAt(0) + "B";
 	}
 }

@@ -1,4 +1,7 @@
-package chess;
+package pieces;
+
+import chess.Board;
+
 public abstract class Piece
 {
 	String color;

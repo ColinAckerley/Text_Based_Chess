@@ -1,4 +1,7 @@
-package chess;
+package pieces;
+
+import chess.Board;
+
 public class Queen extends Piece
 {
 	String color;

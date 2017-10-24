@@ -1,4 +1,12 @@
 package chess;
+
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Queen;
+import pieces.Rook;
+
 public class Board
 {
 	Object[][] board = new Object[8][8];
@@ -83,7 +91,7 @@ public class Board
 	{
 		return false;
 	}
-	boolean pathFree(int curRow, int curCol, int newRow, int newCol)
+	public boolean pathFree(int curRow, int curCol, int newRow, int newCol)
 	{
 		return false;
 	}
