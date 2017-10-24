@@ -6,7 +6,7 @@ public class Queen extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
 		// Combines functionality of bishop + rook
 		// possibly patch these two pieces' checkMoveValidity methods

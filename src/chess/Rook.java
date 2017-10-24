@@ -6,7 +6,7 @@ public class Rook extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
 		// 'dest' must be in same row or same column as origin
 		// if attempted to move diagonally arraywise, return false

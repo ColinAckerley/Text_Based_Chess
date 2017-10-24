@@ -2,6 +2,7 @@ package chess;
 public class Board
 {
 	Object[][] board = new Object[8][8];
+	final int SIZE = 8;
 	void initBoard()
 	{
 		board[0][0] = new Rook("b");

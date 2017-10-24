@@ -2,12 +2,12 @@ package chess;
 public class Pawn extends Piece
 {
 	String color;
-	boolean firstMove = false;
+	boolean hasMoved;
 	public Pawn(String color)
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
 		// only allowable moves are
 		// a) up one row (if array space == ' ' or '##')
