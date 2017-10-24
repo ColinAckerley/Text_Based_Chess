@@ -2,13 +2,25 @@ package chess;
 public class King extends Piece
 {
 	String color;
+	boolean hasMoved;
+	boolean hasCastled;
 	public King(String color)
 	{
+		this.hasMoved = false;
+		this.hasCastled = false;
 		this.color = color;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
-		return false;
+		int rowDiff = Math.abs(curRow - newRow);
+		int colDiff = Math.abs(curCol - newCol);
+		if(!b.pathFree(curRow, curCol, newRow, newCol))
+			return false;
+		if(colDiff > 1 || rowDiff > 1)
+			return false;
+		if(newRow < 0 || newRow > b.SIZE || newCol < 0 || newCol> b.SIZE)
+			return false;
+		return true;
 	}
 	public String getColor()
 	{

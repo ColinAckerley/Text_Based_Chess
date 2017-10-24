@@ -6,7 +6,7 @@ public class Knight extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
 	{
 		return false;
 	}
