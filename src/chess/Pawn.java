@@ -19,10 +19,12 @@ public class Pawn extends Piece
 	{
 		return null;
 	}
+	public String getColor()
+	{
+		return this.color;
+	}
 	public String toString()
 	{
-		if(color.equals("w"))
-			return "wp";
-		return "bp";
+		return color.charAt(0) + "P";
 	}
 }

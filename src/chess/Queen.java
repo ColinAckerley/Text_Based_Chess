@@ -8,16 +8,19 @@ public class Queen extends Piece
 	}
 	boolean checkMoveValidity(String origin, String dest)
 	{
+		char 
 		return false;
 	}
 	String move(String origin, String dest)
 	{
 		return "";
 	}
+	public String getColor()
+	{
+		return this.color;
+	}
 	public String toString()
 	{
-		if(color.equals("w"))
-			return "wQ";
-		return "bQ";
+		return color.charAt(0) + "Q";
 	}
 }

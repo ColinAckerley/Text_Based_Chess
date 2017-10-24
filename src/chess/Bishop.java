@@ -14,10 +14,12 @@ public class Bishop extends Piece
 	{
 		return "";
 	}
+	public String getColor()
+	{
+		return this.color;
+	}
 	public String toString()
 	{
-		if(color.equals("w"))
-			return "wB";
-		return "bB";
+		return color.charAt(0) + "B";
 	}
 }
