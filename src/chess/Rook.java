@@ -27,10 +27,12 @@ public class Rook extends Piece
 		
 		return "";
 	}
+	public String getColor()
+	{
+		return this.color;
+	}
 	public String toString()
 	{
-		if(color.equals("w"))
-			return "wR";
-		return "bR";
+		return color.charAt(0) + "R";
 	}
 }
