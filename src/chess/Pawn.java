@@ -1,35 +1,67 @@
 package chess;
-public class Pawn extends Piece
-{
+
+public class Pawn extends Piece {
 	String color;
-	boolean firstMove = false;
-	public Pawn(String color)
-	{
+	boolean hasMoved;
+	Board board;
+
+	public Pawn(String color) {
 		this.color = color;
+		this.hasMoved = false;
 	}
-	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
-	{
-		// only allowable moves are
-		// a) up one row (if array space == ' ' or '##')
-		// b) up two rows (if firstMove = true && array space == ' ' or '##')
-		// c) forwards diagonal either L or R (if the array space != ' ' or '##'
-		// )
-		// Reverse this logic for Black Pieces
-		// Problems I am running into/Questions I have:
-		// 1) How do we check board[][] spaces in the Pawn class without the
-		// actual board state provided?
-		// 2) I need a way to turn the Strings 'origin' and 'dest' into concrete
-		// array locations with specific [i][j] locations
-		// 3) When receiving 'origin' string I need to know what color the piece
-		// is in order to properly verify move validity
-		// MAIN CHALLENGE FOR ALL PIECES: Turning ORIGIN and DEST to concrete
-		// array locations
-		// and checking the ACTUAL board state (array entries)
-		// for their values
+
+	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol) {
+		int rowDiff = Math.abs(newRow - curRow);
+		int colDiff = Math.abs(newCol - curCol);
+
+		if (color == "Black") {
+
+			if (newRow <= curRow || colDiff > 1) {       // pawn can't go backwards, or move over more than one space column-wise
+
+				return false;
+			}
+
+			if (hasMoved == true && rowDiff > 1) {		 // pawn can't move up more than one space if it has already moved
+
+				return false;
+			}
+
+			if (hasMoved == false && rowDiff > 2) {      // pawn can't move up more than two spaces, if first move
+
+				return false;
+			}
+			
+			
+			
+			
+
+		}
+
+		if (color == "White") {
+			
+			if (newRow >= curRow || colDiff > 1) {       // pawn can't go backwards, or move over more than one space column-wise
+
+				return false;
+			}
+
+			if (hasMoved == true && rowDiff > 1) {
+
+				return false;
+			}
+
+			if (hasMoved == false && rowDiff > 2) {
+
+				return false;
+			}
+			
+
+		}
+
+
 		return false;
 	}
-	Queen promote(String location, Pawn p)
-	{
+
+	Queen promote(String location, Pawn p) {
 		Queen q = new Queen(color);
 		// Cannot cast Pawn to Queen. Will need to create new Queen and give the
 		// last known location of pawn
@@ -38,12 +70,12 @@ public class Pawn extends Piece
 		// location
 		return null;
 	}
-	public String getColor()
-	{
+
+	public String getColor() {
 		return this.color;
 	}
-	public String toString()
-	{
+
+	public String toString() {
 		return color.charAt(0) + "P";
 	}
 }
