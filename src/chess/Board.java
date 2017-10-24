@@ -82,6 +82,10 @@ public class Board
 	{
 		return false;
 	}
+	boolean pathFree(int curRow, int curCol, int newRow, int newCol)
+	{
+		return false;
+	}
 	Pawn checkPromotion()
 	{
 		return null;

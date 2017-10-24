@@ -7,7 +7,7 @@ public class Pawn extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(String origin, String dest)
+	boolean checkMoveValidity(int curRow, int curCol, int newRow, int newCol)
 	{
 		return false;
 	}
