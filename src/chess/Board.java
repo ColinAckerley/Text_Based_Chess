@@ -120,7 +120,7 @@ public class Board
 					board[newRow][newCol] = new Queen("w");
 				}
 				if(desiredPiece == "B")
-				{f
+				{
 					board[newRow][newCol] = new Bishop("w");
 				}
 			}
