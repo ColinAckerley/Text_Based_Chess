@@ -1,7 +1,5 @@
 package pieces;
-
 import chess.Board;
-
 public class Bishop extends Piece
 {
 	String color;

@@ -46,7 +46,11 @@ public class Pawn extends Piece
 				return false;
 			}
 		}
-		return false;
+		if(colDiff == 1)
+		{
+			return b.checkPawnDiag(curRow, curCol, newRow, newCol);
+		}
+		return true;
 	}
 	public String getColor()
 	{

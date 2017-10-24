@@ -1,7 +1,5 @@
 package pieces;
-
 import chess.Board;
-
 public class Knight extends Piece
 {
 	String color;
