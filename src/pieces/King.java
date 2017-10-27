@@ -29,4 +29,16 @@ public class King extends Piece
 	{
 		return color.charAt(0) + "K";
 	}
+	
+	public boolean getHasMoved(King k) {
+		
+		if (k.hasMoved == true) {
+			
+			return true;
+		}
+		
+		return false;
+		
+	}
 }
+	
