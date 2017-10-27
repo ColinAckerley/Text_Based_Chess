@@ -34,6 +34,11 @@ public class Chess
 			}
 			else
 			{
+				if(!chessBoard.move(curColor, input))
+				{
+					System.out.println("Illegal move, try again");
+					continue;
+				}
 				chessBoard.move(curColor, input);
 				if(chessBoard.inCheck(flipColor(curColor)))
 				{
