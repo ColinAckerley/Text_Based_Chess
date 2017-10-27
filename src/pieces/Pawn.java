@@ -10,14 +10,11 @@ public class Pawn extends Piece
 		this.color = color;
 		this.hasMoved = false;
 	}
-	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Piece[][] board, int curRow, int curCol, int newRow, int newCol)
 	{
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
-		
-		if (!board.pathFree(curRow, curCol, newRow, newCol)) {
-			return false;}
-			
+					
 		if(color == "Black")
 		{
 			if(newRow <= curRow || colDiff > 1)
@@ -49,10 +46,14 @@ public class Pawn extends Piece
 			{
 				return false;
 			}
+			
+			if (board[newRow][newCol] != null) {
+				return false;}
+			
 		}
 		if(colDiff == 1)
 		{
-			return checkPawnDiag(b,curRow, curCol, newRow, newCol);
+			return checkPawnDiag(board,curRow, curCol, newRow, newCol);
 		}
 		return true;
 	}
@@ -151,4 +152,16 @@ public class Pawn extends Piece
 		}
 		return false;
 	}
+	
+	boolean lastMoveWasDoubleMove(int pawnRow, int pawnCol)
+	{
+		// check lastMove value(?) to see if given row,column coordinates was
+		// the last move
+		// and also checks if hasMoved of Pawn piece at given coordinates is
+		// false;
+		return false;
+	}
+	
+	
+	
   }	

@@ -4,5 +4,5 @@ public abstract class Piece
 {
 	String color;
 	boolean hasMoved;
-	abstract boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol);
+	abstract boolean checkMoveValidity(Piece[][] board, int curRow, int curCol, int newRow, int newCol);
 }

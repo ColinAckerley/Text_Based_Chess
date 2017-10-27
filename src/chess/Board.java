@@ -103,14 +103,7 @@ public class Board
 			}
 		}
 	}
-	boolean lastMoveWasDoubleMove(int pawnRow, int pawnCol)
-	{
-		// check lastMove value(?) to see if given row,column coordinates was
-		// the last move
-		// and also checks if hasMoved of Pawn piece at given coordinates is
-		// false;
-		return false;
-	}
+	
 	public String toString()
 	{
 		String curBoard = "";
