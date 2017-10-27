@@ -69,8 +69,9 @@ public class Board
 	void checkStatus()
 	{
 	}
-	public void move(String color, String move)
+	public boolean move(String color, String move)
 	{
+		return false;
 	}
 	void printBoard()
 	{
