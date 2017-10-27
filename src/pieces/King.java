@@ -36,52 +36,31 @@ public class King extends Piece
 			
 			return true;
 		}
-		
 		return false;
-		
-	}
-	
+	}	
 
-	boolean castleCheckValid(int curRow, int curCol, int newRow, int newCol)
+	boolean castleCheckValid(Piece[][] board, int curRow, int curCol, int newRow, int newCol)
 	{
 		if(
-			board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" && board[curRow][curCol].hasMoved == false
-					&& board[newRow][newCol].getHasMoved() == false
-					&& board.pathFree(curRow, curCol, newRow, newCol) == true
-					&& board[curRow][curCol].inCheck() == false
+			board[curRow][curCol].toString().equals("bK") && board[newRow][newCol].toString().equals("bR") && hasMoved == false
+					&& board[newRow][newCol].hasMoved == false
+					&& board.pathFree(curRow, curCol, newRow, newCol) == true &&
+					inCheck() == false
 		)
 		{
 			return true;
 		}
 		if(
-			board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR"
-					&& board[curRow][curCol].getHasMoved() == false && board[newRow][newCol].getHasMoved() == false
-					&& board.pathFree(curRow, curCol, newRow, newCol) == true
-					&& board[curRow][curCol].inCheck() == false
+			board[curRow][curCol].toString().equals("wK") && board[newRow][newCol].toString().equals("wR")
+														  && board[curRow][curCol].hasMoved == false
+														  && hasMoved == false
+														  && board.pathFree(curRow, curCol, newRow, newCol) == true
+														  && inCheck() == false
 		)
 		{
 			return true;
 		}
 		return false;
-	}
-	public void castle(int curRow, int curCol, int newRow, int newCol)
-	{
-		if(castleCheckValid(curRow, curCol, newRow, newCol) == true)
-		{
-			if(board[curRow][curCol] == "bK")
-			{ // check what color the castling pieces are
-				King k = new King("bK");
-				k = (King) board[curRow][curCol];
-				board[curRow][curCol] = board[newRow][newCol];
-				board[newRow][newCol] = k;
-			}
-			if(board[curRow][curCol] == "wK")
-			{
-				King k = new King("wK");
-				k = (King) board[curRow][curCol];
-				board[curRow][curCol] = board[newRow][newCol];
-				board[newRow][newCol] = k;
-			}
 		}
 	}
 }
