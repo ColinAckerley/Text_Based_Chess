@@ -31,6 +31,7 @@ public class Pawn extends Piece
 			{ // pawn can't move up more than two spaces, if first move
 				return false;
 			}
+			
 		}
 		if(color == "w")
 		{
@@ -48,14 +49,14 @@ public class Pawn extends Piece
 				return false;
 			}
 			
-			if (b[newRow][newCol] != null) {
-				return false;}
-			
 		}
 		if(colDiff == 1)
 		{
 			return checkPawnDiag(board,b,curRow, curCol, newRow, newCol);
 		}
+		if(hasMoved == true && !b[newRow][newCol].toString().equals(null)) {
+			return false;
+			}
 		this.hasMoved = true;
 		return true;
 		
@@ -63,11 +64,7 @@ public class Pawn extends Piece
 	
 	public boolean checkPawnDiag(Board board, Piece[][] b,int curRow, int curCol, int newRow, int newCol)
 	{
-		if(
-			(b[newRow][newCol].toString().equals(null) || b[newRow][newCol].toString().equals(null))
-					&& enpassantCheck(board, b, curRow, curCol, newRow, newCol) == false
-		)
-		{
+		if((b[newRow][newCol].toString().equals(null))) {
 			return false;
 		}
 		return true;

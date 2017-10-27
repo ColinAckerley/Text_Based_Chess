@@ -246,6 +246,7 @@ public class Board
 				{
 					if(fileCount % 2 == 0)
 					{
+<<<<<<< HEAD
 						if(rankCount % 2 == 0)
 						{
 							string += "##";
@@ -254,13 +255,32 @@ public class Board
 						{
 							string += "  ";
 						}
+=======
+						curBoard += "## ";
+					}
+					else if(curRow % 2 == 0 && curCol % 2 == 1)
+					{
+						if(curCol == 0 || curCol == SIZE - 1)
+							curBoard += "   ";
+						else
+							curBoard += "   ";
+					}
+					else if(curRow % 2 == 1 && curCol % 2 == 1)
+					{
+						curBoard += "## ";
+>>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 					}
 					else
 					{
+<<<<<<< HEAD
 						if(rankCount % 2 == 0)
 						{
 							string += "  ";
 						}
+=======
+						if(curCol == 0 ||  curCol == SIZE - 1)
+							curBoard += "   ";
+>>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 						else
 						{
 							string += "##";
@@ -268,11 +288,20 @@ public class Board
 					}
 				}
 				else
+<<<<<<< HEAD
 				{
 					string += piece;
 				}
 				string += " ";
 				rankCount++;
+=======
+					curBoard += board[curRow][curCol] + " ";
+			}
+			if(curRow > 1 && curRow < 6)
+			{
+				curBoard += "";
+				curBoard += SIZE - curRow;
+>>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 			}
 			fileCount++;
 			string += "\n";
