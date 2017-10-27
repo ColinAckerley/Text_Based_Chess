@@ -54,16 +54,16 @@ public class Pawn extends Piece
 		}
 		if(colDiff == 1)
 		{
-			return checkPawnDiag(b,curRow, curCol, newRow, newCol);
+			return checkPawnDiag(board,b,curRow, curCol, newRow, newCol);
 		}
 		return true;
 	}
 	
-	public boolean checkPawnDiag(Piece[][] b,int curRow, int curCol, int newRow, int newCol)
+	public boolean checkPawnDiag(Board board, Piece[][] b,int curRow, int curCol, int newRow, int newCol)
 	{
 		if(
 			(b[newRow][newCol].toString().equals(null) || b[newRow][newCol].toString().equals(null))
-					&& enpassantCheck(b, curRow, curCol, newRow, newCol) == false
+					&& enpassantCheck(board, b, curRow, curCol, newRow, newCol) == false
 		)
 		{
 			return false;
@@ -71,14 +71,14 @@ public class Pawn extends Piece
 		return true;
 	}
 	
-	public boolean enpassantCheck(Piece[][] b, int curRow, int curCol, int newRow, int newCol)
+	public boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
 		if(b[curRow][curCol].toString().equals("bP") && curRow == 4)
 		{ // Checks if BLACK piece is in the correct row for Enpassant
 			if(curCol == 0 && b[curRow][curCol + 1].toString().equals("wP"))
 			{ // If black piece is on left edge of the board & opponent's pawn
 				// is adjacent to the right
-				if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(b,curRow, curCol+1))
+				if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(board, b,curRow, curCol+1))
 				{ // if destination is directly below adjacent pawn
 					// and the last move was that pawn's double move
 					return true;
@@ -86,20 +86,20 @@ public class Pawn extends Piece
 			}
 			if(curCol == 7 && b[curRow][curCol-1].toString().equals("wP"))
 			{ // edge case on right-most column of board
-				if((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(b,curRow, curCol-1))
+				if((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(board, b,curRow, curCol-1))
 				{
 					return true;
 				}
 			}
 			if(curCol != 0 && curCol != 7 && b[curRow][curCol-1].toString().equals("wP"))
 			{ // non-edge columns with pawn to the left
-				if((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(b,curRow, curCol-1))
+				if((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(board, b,curRow, curCol-1))
 				{
 					return true;
 				}
 				if(curCol != 0 && curCol != 7 && b[curRow][curCol+1].toString().equals("wP"))
 				{ // non-edge columns with pawn to the right
-					if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(b,curRow, curCol + 1))
+					if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(board, b,curRow, curCol + 1))
 						{
 						return true;
 					}
@@ -110,28 +110,28 @@ public class Pawn extends Piece
 		{ // Checks if WHITE piece is in the correct row for Enpassant
 			if(curCol == 0 && b[curRow][curCol+1].toString().equals("bP"))
 			{
-				if((newRow == curRow-1&& newCol == curCol+1) && lastMoveWasDoubleMove(b,curRow,curCol+1))
+				if((newRow == curRow-1&& newCol == curCol+1) && lastMoveWasDoubleMove(board, b,curRow,curCol+1))
 				{
 					return true;
 				}
 			}
 			if(curCol == 7 && b[curRow][curCol-1].toString().equals("bP"))
 			{
-				if((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(b,curRow, curCol-1))
+				if((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(board, b,curRow, curCol-1))
 				{
 					return true;
 				}
 			}
 			if(curCol != 0 && curCol != 7 && b[curRow][curCol-1].toString().equals("bP"))
 			{
-				if((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(b,curRow,curCol-1))
+				if((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(board, b,curRow,curCol-1))
 				{
 					return true;
 				}
 				if(curCol != 0 && curCol != 7 && b[curRow][curCol+1].toString().equals("bP"))
 				{
 					if(
-						(newRow == curRow-1 && newCol == curCol+1) && lastMoveWasDoubleMove(b,curRow,curCol+1))
+						(newRow == curRow-1 && newCol == curCol+1) && lastMoveWasDoubleMove(board, b,curRow,curCol+1))
 						{
 						return true;
 					}
