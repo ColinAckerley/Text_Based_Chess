@@ -12,8 +12,8 @@ public class Chess
 		while (true)
 		{
 			System.out.println(chessBoard);
-			System.out.print(curColor + "'s move:");
-			String input = getInput.next();
+			System.out.print(curColor + "'s move: ");
+			String input = getInput.nextLine();
 			System.out.println();
 			if(input.equalsIgnoreCase("resign"))
 			{
@@ -36,7 +36,7 @@ public class Chess
 			{
 				if(!chessBoard.move(curColor, input))
 				{
-					System.out.println("Illegal move, try again");
+					System.out.println("Illegal move, try again\n");
 					continue;
 				}
 				chessBoard.move(curColor, input);

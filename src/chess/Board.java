@@ -42,6 +42,62 @@ public class Board
 		String newPos = move.substring(3, 5);
 		curRow = Integer.parseInt(curPos.substring(1));
 		newRow = Integer.parseInt(newPos.substring(1));
+		int tmpInt = curRow;
+		switch (tmpInt)
+		{
+		case 1:
+			curRow = 7;
+			break;
+		case 2:
+			curRow = 6;
+			break;
+		case 3:
+			curRow = 5;
+			break;
+		case 4:
+			curRow = 4;
+			break;
+		case 5:
+			curRow = 3;
+			break;
+		case 6:
+			curRow = 2;
+			break;
+		case 7:
+			curRow = 1;
+			break;
+		case 8:
+			curRow = 0;
+			break;
+		}
+		tmpInt = newRow;
+		switch (tmpInt)
+		{
+		case 1:
+			newRow = 7;
+			break;
+		case 2:
+			newRow = 6;
+			break;
+		case 3:
+			newRow = 5;
+			break;
+		case 4:
+			newRow = 4;
+			break;
+		case 5:
+			newRow = 3;
+			break;
+		case 6:
+			newRow = 2;
+			break;
+		case 7:
+			newRow = 1;
+			break;
+		case 8:
+			newRow = 0;
+			break;
+		}
 		char tmp = curPos.charAt(1);
 		switch (tmp)
 		{
@@ -105,6 +161,7 @@ public class Board
 		}
 		else if(curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
 		{
+			board[curRow][curCol] = null;
 			board[newRow][newCol] = curPiece;
 		}
 		if(checkPromotion(color))
