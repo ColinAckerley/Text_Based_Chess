@@ -29,60 +29,12 @@ public class King extends Piece
 	{
 		return color.charAt(0) + "K";
 	}
-	
-	public boolean getHasMoved(King k) {
-		
-		if (k.hasMoved == true) {
-			
-			return true;
-		}
-		
-		return false;
-		
-	}
-	
-
-	boolean castleCheckValid(int curRow, int curCol, int newRow, int newCol)
+	public boolean getHasMoved(King k)
 	{
-		if(
-			board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" && board[curRow][curCol].hasMoved == false
-					&& board[newRow][newCol].getHasMoved() == false
-					&& board.pathFree(curRow, curCol, newRow, newCol) == true
-					&& board[curRow][curCol].inCheck() == false
-		)
-		{
-			return true;
-		}
-		if(
-			board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR"
-					&& board[curRow][curCol].getHasMoved() == false && board[newRow][newCol].getHasMoved() == false
-					&& board.pathFree(curRow, curCol, newRow, newCol) == true
-					&& board[curRow][curCol].inCheck() == false
-		)
+		if(k.hasMoved == true)
 		{
 			return true;
 		}
 		return false;
-	}
-	public void castle(int curRow, int curCol, int newRow, int newCol)
-	{
-		if(castleCheckValid(curRow, curCol, newRow, newCol) == true)
-		{
-			if(board[curRow][curCol] == "bK")
-			{ // check what color the castling pieces are
-				King k = new King("bK");
-				k = (King) board[curRow][curCol];
-				board[curRow][curCol] = board[newRow][newCol];
-				board[newRow][newCol] = k;
-			}
-			if(board[curRow][curCol] == "wK")
-			{
-				King k = new King("wK");
-				k = (King) board[curRow][curCol];
-				board[curRow][curCol] = board[newRow][newCol];
-				board[newRow][newCol] = k;
-			}
-		}
 	}
 }
-	

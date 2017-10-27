@@ -18,6 +18,10 @@ public class Board
 		board[0][5] = new Bishop("b");
 		board[0][6] = new Knight("b");
 		board[0][7] = new Rook("b");
+		for(int i = 0; i < SIZE; i++)
+		{
+			board[1][i] = new Pawn("b");
+		}
 		board[7][0] = new Rook("w");
 		board[7][1] = new Knight("w");
 		board[7][2] = new Bishop("w");
@@ -26,6 +30,10 @@ public class Board
 		board[7][5] = new Bishop("w");
 		board[7][6] = new Knight("w");
 		board[7][7] = new Rook("w");
+		for(int i = 0; i < SIZE; i++)
+		{
+			board[6][i] = new Pawn("w");
+		}
 	}
 	void drawBoard()
 	{
@@ -36,17 +44,6 @@ public class Board
 	public boolean move(String color, String move)
 	{
 		return false;
-	}
-	void printBoard()
-	{
-		for(int i = 0; i < 8; i++)
-		{
-			for(int j = 0; j < 8; j++)
-			{
-				System.out.print(board[i][j] + " ");
-			}
-			System.out.println();
-		}
 	}
 	String inCheckmate()
 	{
@@ -60,65 +57,51 @@ public class Board
 	{
 		return false;
 	}
-	boolean checkPromotion(int newRow, int newCol)
+	boolean checkPromotion(String color)
 	{
-		if(board[0][newCol] == "wP")
+		if(color.equals("b"))
 		{
-			return true;
+			for(int i = 0; i < SIZE; i++)
+			{
+				if(board[0][i].toString().equals("wP"))
+				{
+					return true;
+				}
+			}
 		}
-		if(board[7][newCol] == "bP")
+		if(color.equals("w"))
 		{
-			return true;
+			for(int i = 0; i < SIZE; i++)
+			{
+				if(board[7][i].toString().equals("bP"))
+				{
+					return true;
+				}
+			}
 		}
 		return false;
 	}
-	public void promote(String desiredPiece, int newRow, int newCol)
+	public void promote(String desiredPiece, int newRow, int newCol, String color)
 	{
-		if(checkPromotion(newRow, newCol) == true)
+		if(checkPromotion(color))
 		{
-			if(newRow == 0)
+			if(desiredPiece == "R")
 			{
-				if(desiredPiece == "R")
-				{
-					board[newRow][newCol] = new Rook("w");
-				}
-				if(desiredPiece == "N")
-				{
-					board[newRow][newCol] = new Knight("w");
-				}
-				if(desiredPiece == "Q")
-				{
-					board[newRow][newCol] = new Queen("w");
-				}
-				if(desiredPiece == "B")
-				{
-					board[newRow][newCol] = new Bishop("w");
-				}
+				board[newRow][newCol] = new Rook(color);
 			}
-			if(newRow == 7)
+			if(desiredPiece == "N")
 			{
-				if(desiredPiece == "R")
-				{
-					board[newRow][newCol] = new Rook("b");
-				}
-				if(desiredPiece == "N")
-				{
-					board[newRow][newCol] = new Knight("b");
-				}
-				if(desiredPiece == "Q")
-				{
-					board[newRow][newCol] = new Queen("b");
-				}
-				if(desiredPiece == "B")
-				{
-					board[newRow][newCol] = new Bishop("b");
-				}
+				board[newRow][newCol] = new Knight(color);
+			}
+			if(desiredPiece == "Q")
+			{
+				board[newRow][newCol] = new Queen(color);
+			}
+			if(desiredPiece == "B")
+			{
+				board[newRow][newCol] = new Bishop(color);
 			}
 		}
-	}
-	
-	public void removePiece(Object o)
-	{
 	}
 	boolean lastMoveWasDoubleMove(int pawnRow, int pawnCol)
 	{
@@ -131,11 +114,12 @@ public class Board
 	public String toString()
 	{
 		String curBoard = "";
-		for(int curRow = 0; curRow < SIZE; curRow++)
+		int curRow;
+		for(curRow = 0; curRow < SIZE; curRow++)
 		{
 			for(int curCol = 0; curCol < SIZE; curCol++)
 			{
-				if(board[curRow][curCol].equals(null))
+				if(board[curRow][curCol] == null)
 				{
 					if(curRow % 2 == 0 && curCol % 2 == 0)
 					{
@@ -143,26 +127,38 @@ public class Board
 					}
 					else if(curRow % 2 == 0 && curCol % 2 == 1)
 					{
-						curBoard += "    ";
-					}
+						if(curCol == 0 || curCol == SIZE -1)
+							curBoard += "   ";
+						else
+							curBoard += "    ";
+					}	
 					else if(curRow % 2 == 1 && curCol % 2 == 1)
 					{
 						curBoard += "##";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 0)
 					{
-						curBoard += "    ";
+						if(curCol == 0 || curCol == SIZE -1)
+							curBoard += "   ";
+						else
+							curBoard += "    ";
 					}
 				}
 				else
-					curBoard += board[curRow][curCol];
+					curBoard += board[curRow][curCol] + " ";
 			}
-			curBoard += SIZE - curRow;
+			if(curRow > 1 && curRow < 6)
+			{
+				curBoard += " ";
+				curBoard +=  SIZE - curRow;
+			}
+			else
+				curBoard += SIZE - curRow;
 			curBoard += "\n";
 		}
-		String letters  = " a  b  c  d  e  f  g  h ";
-		curBoard += "\n";
+		String letters = " a  b  c  d  e  f  g  h ";
 		curBoard += letters;
+		curBoard += "\n";
 		return curBoard;
 	}
 }

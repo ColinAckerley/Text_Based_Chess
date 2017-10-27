@@ -15,12 +15,12 @@ public class Chess
 			System.out.print(curColor + "'s move:");
 			String input = getInput.next();
 			System.out.println();
-			if(input.contains("resign"))
+			if(input.equalsIgnoreCase("resign"))
 			{
 				System.out.println(flipColor(curColor) + " wins");
 				System.exit(0);
 			}
-			if(input.contains("draw"))
+			if(input.equalsIgnoreCase("draw"))
 			{
 				if(drawAvail)
 				{
@@ -28,7 +28,7 @@ public class Chess
 					System.exit(0);
 				}
 			}
-			if(input.contains("draw?"))
+			if(input.equalsIgnoreCase("draw?"))
 			{
 				drawAvail = true;
 			}
