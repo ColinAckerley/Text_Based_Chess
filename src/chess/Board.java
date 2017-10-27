@@ -37,7 +37,7 @@ public class Board
 	}
 	public boolean move(String color, String move)
 	{
-		int curRow, newRow, curCol, newCol;
+		int curRow = 0, newRow = 0, curCol = 0, newCol = 0;
 		String curPos = move.substring(0, 2);
 		String newPos = move.substring(3, 5);
 		curRow = Integer.parseInt(curPos.substring(1));
@@ -98,6 +98,28 @@ public class Board
 			newCol = 7;
 			break;
 		}
+		Piece curPiece = board[curRow][curCol];
+		if(!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
+		{
+			return false;
+		}
+		else if(curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
+		{
+			board[newRow][newCol] = curPiece;
+		}
+		if(checkPromotion(color))
+		{
+			if(move.trim().length() > 5)
+			{
+				if(!checkPromotion(color))
+				{
+					return false;
+				}
+				promote(move.trim().charAt(6), newRow, newCol, color);
+			}
+			else
+				promote('Q', newRow, newCol, color);
+		}
 		return false;
 	}
 	String inCheckmate()
@@ -132,23 +154,23 @@ public class Board
 		}
 		return false;
 	}
-	public void promote(String desiredPiece, int newRow, int newCol, String color)
+	public void promote(char desiredPiece, int newRow, int newCol, String color)
 	{
 		if(checkPromotion(color))
 		{
-			if(desiredPiece == "R")
+			if(desiredPiece == 'R')
 			{
 				board[newRow][newCol] = new Rook(color);
 			}
-			if(desiredPiece == "N")
+			if(desiredPiece == 'N')
 			{
 				board[newRow][newCol] = new Knight(color);
 			}
-			if(desiredPiece == "Q")
+			if(desiredPiece == 'Q')
 			{
 				board[newRow][newCol] = new Queen(color);
 			}
-			if(desiredPiece == "B")
+			if(desiredPiece == 'B')
 			{
 				board[newRow][newCol] = new Bishop(color);
 			}

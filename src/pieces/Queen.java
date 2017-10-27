@@ -7,7 +7,7 @@ public class Queen extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
+	public boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
 	{
 		Piece[][] b = board.getBoard();
 		if(
