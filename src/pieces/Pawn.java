@@ -56,7 +56,9 @@ public class Pawn extends Piece
 		{
 			return checkPawnDiag(board,b,curRow, curCol, newRow, newCol);
 		}
+		this.hasMoved = true;
 		return true;
+		
 	}
 	
 	public boolean checkPawnDiag(Board board, Piece[][] b,int curRow, int curCol, int newRow, int newCol)
