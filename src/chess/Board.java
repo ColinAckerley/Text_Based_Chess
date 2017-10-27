@@ -2,7 +2,7 @@ package chess;
 import pieces.*;
 public class Board
 {
-	Object[][] board = new Object[8][8];
+	Piece[][] board = new Piece[8][8];
 	final int SIZE = 8;
 	public Board()
 	{
@@ -18,42 +18,6 @@ public class Board
 		board[0][5] = new Bishop("b");
 		board[0][6] = new Knight("b");
 		board[0][7] = new Rook("b");
-		for(int i = 0; i < 8; i++)
-		{
-			board[1][i] = new Pawn("b");
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			if(i % 2 == 0)
-				board[5][i] = "##";
-			else
-				board[5][i] = "  ";
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			if(i % 2 == 0)
-				board[4][i] = "  ";
-			else
-				board[4][i] = "##";
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			if(i % 2 == 0)
-				board[3][i] = "##";
-			else
-				board[3][i] = "  ";
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			if(i % 2 == 0)
-				board[2][i] = "  ";
-			else
-				board[2][i] = "##";
-		}
-		for(int m = 0; m < 8; m++)
-		{
-			board[6][m] = new Pawn("w");
-		}
 		board[7][0] = new Rook("w");
 		board[7][1] = new Knight("w");
 		board[7][2] = new Bishop("w");
@@ -165,23 +129,24 @@ public class Board
 	}
 	boolean castleCheckValid(int curRow, int curCol, int newRow, int newCol)
 	{
-		
-		
-		  if (board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" &&
-			  board[curRow][curCol].hasMoved == false && 
-			  board[newRow][newCol].getHasMoved() == false &&
-			  board.pathFree(curRow, curCol, newRow, newCol) == true &&
-		      board[curRow][curCol].inCheck() == false) { 		  
-		  return true; }
-		  
-		  if (board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR" &&
-		      board[curRow][curCol].getHasMoved() == false &&
-		      board[newRow][newCol].getHasMoved() == false &&
-		      board.pathFree(curRow, curCol, newRow, newCol) == true &&
-		      board[curRow][curCol].inCheck() == false) {
-		  
-		  return true; }
-		 
+		if(
+			board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" && board[curRow][curCol].hasMoved == false
+					&& board[newRow][newCol].getHasMoved() == false
+					&& board.pathFree(curRow, curCol, newRow, newCol) == true
+					&& board[curRow][curCol].inCheck() == false
+		)
+		{
+			return true;
+		}
+		if(
+			board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR"
+					&& board[curRow][curCol].getHasMoved() == false && board[newRow][newCol].getHasMoved() == false
+					&& board.pathFree(curRow, curCol, newRow, newCol) == true
+					&& board[curRow][curCol].inCheck() == false
+		)
+		{
+			return true;
+		}
 		return false;
 	}
 	public void castle(int curRow, int curCol, int newRow, int newCol)
@@ -190,23 +155,17 @@ public class Board
 		{
 			if(board[curRow][curCol] == "bK")
 			{ // check what color the castling pieces are
-				
 				King k = new King("bK");
 				k = (King) board[curRow][curCol];
-				
-				board[curRow][curCol] = board[newRow][newCol]; 
+				board[curRow][curCol] = board[newRow][newCol];
 				board[newRow][newCol] = k;
-				
-				
 			}
 			if(board[curRow][curCol] == "wK")
 			{
 				King k = new King("wK");
 				k = (King) board[curRow][curCol];
-				
-				board[curRow][curCol] = board[newRow][newCol]; 
+				board[curRow][curCol] = board[newRow][newCol];
 				board[newRow][newCol] = k;
-				
 			}
 		}
 	}
@@ -311,7 +270,39 @@ public class Board
 	}
 	public String toString()
 	{
-		printBoard();
-		return "";
+		String curBoard = "";
+		for(int curRow = 0; curRow < SIZE; curRow++)
+		{
+			for(int curCol = 0; curCol < SIZE; curCol++)
+			{
+				if(board[curRow][curCol].equals(null))
+				{
+					if(curRow % 2 == 0 && curCol % 2 == 0)
+					{
+						curBoard += "##";
+					}
+					else if(curRow % 2 == 0 && curCol % 2 == 1)
+					{
+						curBoard += "    ";
+					}
+					else if(curRow % 2 == 1 && curCol % 2 == 1)
+					{
+						curBoard += "##";
+					}
+					else if(curRow % 2 == 1 && curCol % 2 == 0)
+					{
+						curBoard += "    ";
+					}
+				}
+				else
+					curBoard += board[curRow][curCol];
+			}
+			curBoard += SIZE - curRow;
+			curBoard += "\n";
+		}
+		String letters  = " a  b  c  d  e  f  g  h ";
+		curBoard += "\n";
+		curBoard += letters;
+		return curBoard;
 	}
 }
