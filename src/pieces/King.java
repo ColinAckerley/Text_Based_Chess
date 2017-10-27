@@ -62,8 +62,9 @@ public class King extends Piece
 					{
 						return false;
 					}
-				}
-				for(int col = 5; col < 8; col++)
+				}	
+			}
+			 for(int col = 5; col < 8; col++)
 				{
 					if(!b[0][col].toString().equals(null))
 					{
@@ -71,10 +72,10 @@ public class King extends Piece
 					}
 				}
 			}
-		}
+			
 		if(color.equals("w"))
 		{
-			if(curCol > newCol)
+			if(curCol > newCol) {
 				for(int col = 1; col < 4; col++)
 				{
 					if(!b[7][col].toString().equals(null))
@@ -82,6 +83,8 @@ public class King extends Piece
 						return false;
 					}
 				}
+			}	
+				
 			for(int col = 5; col < 7; col++)
 			{
 				if(!b[7][col].toString().equals(null))
