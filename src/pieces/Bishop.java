@@ -7,8 +7,9 @@ public class Bishop extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(Piece[][] b, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
 	{
+		Piece[][] b = board.getBoard();
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
 		if(rowDiff != colDiff)

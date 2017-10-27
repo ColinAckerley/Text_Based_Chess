@@ -10,8 +10,9 @@ public class Pawn extends Piece
 		this.color = color;
 		this.hasMoved = false;
 	}
-	boolean checkMoveValidity(Piece[][] board, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
 	{
+		Piece[][] b = board.getBoard();
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
 					
@@ -47,13 +48,13 @@ public class Pawn extends Piece
 				return false;
 			}
 			
-			if (board[newRow][newCol] != null) {
+			if (b[newRow][newCol] != null) {
 				return false;}
 			
 		}
 		if(colDiff == 1)
 		{
-			return checkPawnDiag(board,curRow, curCol, newRow, newCol);
+			return checkPawnDiag(b,curRow, curCol, newRow, newCol);
 		}
 		return true;
 	}

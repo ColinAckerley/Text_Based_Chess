@@ -154,6 +154,10 @@ public class Board
 			}
 		}
 	}
+	public Piece[][] getBoard()
+	{
+		return board;
+	}
 	public String toString()
 	{
 		String curBoard = "";
