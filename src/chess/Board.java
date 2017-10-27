@@ -155,11 +155,6 @@ public class Board
 			break;
 		}
 		Piece curPiece = board[curRow][curCol];
-		System.out.println("The current piece is " + curPiece);
-		System.out.println("The current row is" + curRow);
-		System.out.println("The current col is " + curCol);
-		System.out.println("The new row is " +  newRow);
-		System.out.println("The new col is " + newCol);
 		if(!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
 		{
 			throw new Exception();
@@ -240,52 +235,55 @@ public class Board
 	}
 	public String toString()
 	{
-		String curBoard = "";
-		int curRow;
-		for(curRow = 0; curRow < SIZE; curRow++)
+		String string = "";
+		int fileCount = 0;
+		for(Piece[] pieces:board)
 		{
-			for(int curCol = 0; curCol < SIZE; curCol++)
+			int rankCount = 0;
+			for(Piece piece:pieces)
 			{
-				if(board[curRow][curCol] == null)
+				if(piece == null)
 				{
-					if(curRow % 2 == 0 && curCol % 2 == 0)
+					if(fileCount % 2 == 0)
 					{
-						curBoard += "## ";
-					}
-					else if(curRow % 2 == 0 && curCol % 2 == 1)
-					{
-						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "  ";
+						if(rankCount % 2 == 0)
+						{
+							string += "##";
+						}
 						else
-							curBoard += "   ";
+						{
+							string += "  ";
+						}
 					}
-					else if(curRow % 2 == 1 && curCol % 2 == 1)
+					else
 					{
-						curBoard += " ##";
-					}
-					else if(curRow % 2 == 1 && curCol % 2 == 0)
-					{
-						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "  ";
+						if(rankCount % 2 == 0)
+						{
+							string += "  ";
+						}
 						else
-							curBoard += "   ";
+						{
+							string += "##";
+						}
 					}
 				}
 				else
-					curBoard += board[curRow][curCol] + " ";
+				{
+					string += piece;
+				}
+				string += " ";
+				rankCount++;
 			}
-			if(curRow > 1 && curRow < 6)
-			{
-				curBoard += " ";
-				curBoard += SIZE - curRow;
-			}
-			else
-				curBoard += SIZE - curRow;
-			curBoard += "\n";
+			fileCount++;
+			string += "\n";
 		}
-		String letters = " a  b  c  d  e  f  g  h ";
-		curBoard += letters;
-		curBoard += "\n";
-		return curBoard;
+		String reverseString = "";
+		reverseString += "  a  b  c  d  e  f  g  h \n";
+		String[] stringSplit = string.split("\n");
+		for(int x = stringSplit.length - 1; x >= 0; x--)
+		{
+			reverseString += x + 1 + " " + stringSplit[x] + "\n";
+		}
+		return reverseString;
 	}
 }
