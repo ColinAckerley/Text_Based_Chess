@@ -235,27 +235,16 @@ public class Board
 	}
 	public String toString()
 	{
-		String string = "";
-		int fileCount = 0;
-		for(Piece[] pieces:board)
+		String curBoard = "";
+		int curRow;
+		for(curRow = 0; curRow < SIZE; curRow++)
 		{
-			int rankCount = 0;
-			for(Piece piece:pieces)
+			for(int curCol = 0; curCol < SIZE; curCol++)
 			{
-				if(piece == null)
+				if(board[curRow][curCol] == null)
 				{
-					if(fileCount % 2 == 0)
+					if(curRow % 2 == 0 && curCol % 2 == 0)
 					{
-<<<<<<< HEAD
-						if(rankCount % 2 == 0)
-						{
-							string += "##";
-						}
-						else
-						{
-							string += "  ";
-						}
-=======
 						curBoard += "## ";
 					}
 					else if(curRow % 2 == 0 && curCol % 2 == 1)
@@ -268,51 +257,30 @@ public class Board
 					else if(curRow % 2 == 1 && curCol % 2 == 1)
 					{
 						curBoard += "## ";
->>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 					}
-					else
+					else if(curRow % 2 == 1 && curCol % 2 == 0)
 					{
-<<<<<<< HEAD
-						if(rankCount % 2 == 0)
-						{
-							string += "  ";
-						}
-=======
-						if(curCol == 0 ||  curCol == SIZE - 1)
+						if(curCol == 0 || curCol == SIZE - 1)
 							curBoard += "   ";
->>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 						else
-						{
-							string += "##";
-						}
+							curBoard += "   ";
 					}
 				}
 				else
-<<<<<<< HEAD
-				{
-					string += piece;
-				}
-				string += " ";
-				rankCount++;
-=======
 					curBoard += board[curRow][curCol] + " ";
 			}
 			if(curRow > 1 && curRow < 6)
 			{
 				curBoard += "";
 				curBoard += SIZE - curRow;
->>>>>>> 198303eec774bb90c531223f3b32f422b5d39c6a
 			}
-			fileCount++;
-			string += "\n";
+			else
+				curBoard += SIZE - curRow;
+			curBoard += "\n";
 		}
-		String reverseString = "";
-		reverseString += "  a  b  c  d  e  f  g  h \n";
-		String[] stringSplit = string.split("\n");
-		for(int x = stringSplit.length - 1; x >= 0; x--)
-		{
-			reverseString += x + 1 + " " + stringSplit[x] + "\n";
-		}
-		return reverseString;
+		String letters = " a  b  c  d  e  f  g  h ";
+		curBoard += letters;
+		curBoard += "\n";
+		return curBoard;
 	}
 }

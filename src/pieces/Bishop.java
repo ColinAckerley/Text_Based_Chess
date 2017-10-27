@@ -24,7 +24,7 @@ public class Bishop extends Piece
 		{
 			rowOffset = -1;
 		}
-		if(newCol > curCol) // Determines if the piece if moving left or right
+		if(newCol > curCol) // Determines if the piece is moving left or right
 							// in the columns
 		{
 			colOffset = 1;
@@ -33,15 +33,14 @@ public class Bishop extends Piece
 		{
 			colOffset = -1;
 		}
+		int col = curCol + colOffset;
 		for(int row = curRow + rowOffset; row != newRow; row += rowOffset)
 		{
-			for(int col = curCol + colOffset; col != newCol; col += colOffset)
+			if(b[row][col] != null) // If space is occupied
 			{
-				if(b[row][col] != null) // If space is occupied
-				{
-					return false;
-				}
+				return false;
 			}
+			col += colOffset;
 		}
 		return true;
 	}
