@@ -255,18 +255,18 @@ public class Board
 					else if(curRow % 2 == 0 && curCol % 2 == 1)
 					{
 						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "  ";
+							curBoard += "   ";
 						else
 							curBoard += "   ";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 1)
 					{
-						curBoard += " ##";
+						curBoard += "## ";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 0)
 					{
-						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "  ";
+						if(curCol == 0 ||  curCol == SIZE - 1)
+							curBoard += "   ";
 						else
 							curBoard += "   ";
 					}
@@ -276,7 +276,7 @@ public class Board
 			}
 			if(curRow > 1 && curRow < 6)
 			{
-				curBoard += " ";
+				curBoard += "";
 				curBoard += SIZE - curRow;
 			}
 			else
