@@ -12,8 +12,6 @@ public class Pawn extends Piece
 	}
 	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
 	{
-<<<<<<< HEAD
-=======
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
 		
@@ -56,7 +54,6 @@ public class Pawn extends Piece
 		{
 			return checkPawnDiag(b,curRow, curCol, newRow, newCol);
 		}
->>>>>>> 61e7024bff9ce599a53b41ec8d28f97f2ccf338f
 		return true;
 	}
 	public String getColor()
@@ -67,9 +64,6 @@ public class Pawn extends Piece
 	{
 		return color.charAt(0) + "P";
 	}
-<<<<<<< HEAD
-}
-=======
 	
 	public boolean checkPawnDiag(Piece[][] board,int curRow, int curCol, int newRow, int newCol)
 	{
@@ -158,4 +152,3 @@ public class Pawn extends Piece
 		return false;
 	}
   }	
->>>>>>> 61e7024bff9ce599a53b41ec8d28f97f2ccf338f

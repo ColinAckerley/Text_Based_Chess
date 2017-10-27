@@ -29,11 +29,6 @@ public class King extends Piece
 	{
 		return color.charAt(0) + "K";
 	}
-<<<<<<< HEAD
-	public boolean getHasMoved(King k)
-	{
-		if(k.hasMoved == true)
-=======
 	
 	public boolean getHasMoved(King k) {
 		
@@ -62,14 +57,11 @@ public class King extends Piece
 														  && board.pathFree(curRow, curCol, newRow, newCol) == true
 														  && inCheck() == false
 		)
->>>>>>> 61e7024bff9ce599a53b41ec8d28f97f2ccf338f
 		{
 			return true;
 		}
 		return false;
-<<<<<<< HEAD
-=======
 		}
->>>>>>> 61e7024bff9ce599a53b41ec8d28f97f2ccf338f
 	}
 }
+	
