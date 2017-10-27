@@ -35,7 +35,7 @@ public class Board
 			board[6][i] = new Pawn("w");
 		}
 	}
-	public boolean move(String color, String move)
+	public void move(String color, String move) throws Exception
 	{
 		int curRow = 0, newRow = 0, curCol = 0, newCol = 0;
 		String curPos = move.substring(0, 2);
@@ -98,7 +98,7 @@ public class Board
 			newRow = 0;
 			break;
 		}
-		char tmp = curPos.charAt(1);
+		char tmp = curPos.charAt(0);
 		switch (tmp)
 		{
 		case 'a':
@@ -126,7 +126,7 @@ public class Board
 			curCol = 7;
 			break;
 		}
-		tmp = newPos.charAt(1);
+		tmp = newPos.charAt(0);
 		switch (tmp)
 		{
 		case 'a':
@@ -155,29 +155,30 @@ public class Board
 			break;
 		}
 		Piece curPiece = board[curRow][curCol];
+		System.out.println("The current piece is " + curPiece);
+		System.out.println("The current row is" + curRow);
+		System.out.println("The current col is " + curCol);
+		System.out.println("The new row is " +  newRow);
+		System.out.println("The new col is " + newCol);
 		if(!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
 		{
-			return false;
+			throw new Exception();
 		}
-		else if(curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
-		{
-			board[curRow][curCol] = null;
-			board[newRow][newCol] = curPiece;
-		}
+		board[newRow][newCol] = curPiece;
+		board[curRow][curCol] = null;
 		if(checkPromotion(color))
 		{
 			if(move.trim().length() > 5)
 			{
 				if(!checkPromotion(color))
 				{
-					return false;
+					throw new Exception();
 				}
 				promote(move.trim().charAt(6), newRow, newCol, color);
 			}
 			else
 				promote('Q', newRow, newCol, color);
 		}
-		return false;
 	}
 	String inCheckmate()
 	{
@@ -249,25 +250,25 @@ public class Board
 				{
 					if(curRow % 2 == 0 && curCol % 2 == 0)
 					{
-						curBoard += "##";
+						curBoard += "## ";
 					}
 					else if(curRow % 2 == 0 && curCol % 2 == 1)
 					{
 						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "   ";
+							curBoard += "  ";
 						else
-							curBoard += "    ";
+							curBoard += "   ";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 1)
 					{
-						curBoard += "##";
+						curBoard += " ##";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 0)
 					{
 						if(curCol == 0 || curCol == SIZE - 1)
-							curBoard += "   ";
+							curBoard += "  ";
 						else
-							curBoard += "    ";
+							curBoard += "   ";
 					}
 				}
 				else

@@ -5,13 +5,15 @@ public class Chess
 	public static void main(String[] args)
 	{
 		boolean drawAvail = false;
+		boolean printBoard = true;
 		@SuppressWarnings("resource")
 		Scanner getInput = new Scanner(System.in);
 		Board chessBoard = new Board();
 		String curColor = "White";
 		while (true)
 		{
-			System.out.println(chessBoard);
+			if(printBoard)
+				System.out.println(chessBoard);
 			System.out.print(curColor + "'s move: ");
 			String input = getInput.nextLine();
 			System.out.println();
@@ -34,20 +36,26 @@ public class Chess
 			}
 			else
 			{
-				if(!chessBoard.move(curColor, input))
+				try
+				{
+					chessBoard.move(curColor, input);
+				}
+				catch (Exception c)
 				{
 					System.out.println("Illegal move, try again\n");
+					printBoard = false;
 					continue;
 				}
-				chessBoard.move(curColor, input);
 				if(chessBoard.inCheck(flipColor(curColor)))
 				{
 					System.out.println("Check");
+					printBoard = true;
 					curColor = flipColor(curColor);
 				}
 				else if(chessBoard.inCheckmate().equals("false"))
 				{
 					curColor = flipColor(curColor);
+					printBoard = true;
 					continue;
 				}
 				else if(chessBoard.inCheckmate().equals("white"))
