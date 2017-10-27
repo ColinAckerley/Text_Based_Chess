@@ -35,25 +35,76 @@ public class Board
 			board[6][i] = new Pawn("w");
 		}
 	}
-	void drawBoard()
-	{
-	}
-	void checkStatus()
-	{
-	}
 	public boolean move(String color, String move)
 	{
+		int curRow, newRow, curCol, newCol;
+		String curPos = move.substring(0, 2);
+		String newPos = move.substring(3, 5);
+		curRow = Integer.parseInt(curPos.substring(1));
+		newRow = Integer.parseInt(newPos.substring(1));
+		char tmp = curPos.charAt(1);
+		switch (tmp)
+		{
+		case 'a':
+			curCol = 0;
+			break;
+		case 'b':
+			curCol = 1;
+			break;
+		case 'c':
+			curCol = 2;
+			break;
+		case 'd':
+			curCol = 3;
+			break;
+		case 'e':
+			curCol = 4;
+			break;
+		case 'f':
+			curCol = 5;
+			break;
+		case 'g':
+			curCol = 6;
+			break;
+		case 'h':
+			curCol = 7;
+			break;
+		}
+		tmp = newPos.charAt(1);
+		switch (tmp)
+		{
+		case 'a':
+			newCol = 0;
+			break;
+		case 'b':
+			newCol = 1;
+			break;
+		case 'c':
+			newCol = 2;
+			break;
+		case 'd':
+			newCol = 3;
+			break;
+		case 'e':
+			newCol = 4;
+			break;
+		case 'f':
+			newCol = 5;
+			break;
+		case 'g':
+			newCol = 6;
+			break;
+		case 'h':
+			newCol = 7;
+			break;
+		}
 		return false;
 	}
 	String inCheckmate()
 	{
 		return "false";
 	}
-	boolean inCheck(String color)
-	{
-		return false;
-	}
-	public boolean pathFree(int curRow, int curCol, int newRow, int newCol)
+	public boolean inCheck(String color)
 	{
 		return false;
 	}
@@ -103,7 +154,6 @@ public class Board
 			}
 		}
 	}
-	
 	public String toString()
 	{
 		String curBoard = "";
@@ -120,18 +170,18 @@ public class Board
 					}
 					else if(curRow % 2 == 0 && curCol % 2 == 1)
 					{
-						if(curCol == 0 || curCol == SIZE -1)
+						if(curCol == 0 || curCol == SIZE - 1)
 							curBoard += "   ";
 						else
 							curBoard += "    ";
-					}	
+					}
 					else if(curRow % 2 == 1 && curCol % 2 == 1)
 					{
 						curBoard += "##";
 					}
 					else if(curRow % 2 == 1 && curCol % 2 == 0)
 					{
-						if(curCol == 0 || curCol == SIZE -1)
+						if(curCol == 0 || curCol == SIZE - 1)
 							curBoard += "   ";
 						else
 							curBoard += "    ";
@@ -143,7 +193,7 @@ public class Board
 			if(curRow > 1 && curRow < 6)
 			{
 				curBoard += " ";
-				curBoard +=  SIZE - curRow;
+				curBoard += SIZE - curRow;
 			}
 			else
 				curBoard += SIZE - curRow;

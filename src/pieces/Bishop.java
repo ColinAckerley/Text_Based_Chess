@@ -7,15 +7,42 @@ public class Bishop extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
-		if(!b.pathFree(curRow, curCol, newRow, newCol))
+		if(rowDiff != colDiff)
 			return false;
-		if(rowDiff == colDiff)
-			return true;
-		return false;
+		int rowOffset, colOffset;
+		if(newRow > curRow) // Determines if the piece is moving up or down the
+							// rows
+		{
+			rowOffset = 1;
+		}
+		else
+		{
+			rowOffset = -1;
+		}
+		if(newCol > curCol) // Determines if the piece if moving left or right
+							// in the columns
+		{
+			colOffset = 1;
+		}
+		else
+		{
+			colOffset = -1;
+		}
+		for(int row = curRow + rowOffset; row != newRow; row += rowOffset)
+		{
+			for(int col = curCol + colOffset; col != newCol; col += colOffset)
+			{
+				if(b[row][col] != null) // If space is occupied
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	public String getColor()
 	{

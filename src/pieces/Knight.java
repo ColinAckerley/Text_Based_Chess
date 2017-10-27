@@ -7,7 +7,7 @@ public class Knight extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);

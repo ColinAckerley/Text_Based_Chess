@@ -7,15 +7,29 @@ public class Rook extends Piece
 	{
 		this.color = color;
 	}
-	boolean checkMoveValidity(Board b, int curRow, int curCol, int newRow, int newCol)
+	boolean checkMoveValidity(Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
-		if(rowDiff != 0 && colDiff == 0)
-			return true;
-		if(colDiff != 0 && rowDiff == 0)
-			return true;
-		return false;
+		if(rowDiff != 0 && colDiff != 0)
+			return false;
+		if(rowDiff == 0)
+		{
+			for(int i = curCol; i < newCol-1; i++)
+			{
+				if(b[curRow][i] != null)
+					return false;
+			}
+		}
+		if(colDiff == 0)
+		{
+			for(int i = curRow; i < newRow-1; i++)
+			{
+				if(b[i][curCol] != null)
+					return false;
+			}
+		}
+		return true;
 	}
 	public String getColor()
 	{
