@@ -11,7 +11,7 @@ public class King extends Piece
 		this.hasCastled = false;
 		this.color = color;
 	}
-	boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
+	public boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
 	{
 		Piece[][] b = board.getBoard();
 		int rowDiff = Math.abs(curRow - newRow);
