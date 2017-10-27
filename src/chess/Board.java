@@ -1,6 +1,5 @@
 package chess;
 import pieces.*;
-import pieces.Pawn;
 public class Board
 {
 	Object[][] board = new Object[8][8];
@@ -165,26 +164,23 @@ public class Board
 	}
 	boolean castleCheckValid(int curRow, int curCol, int newRow, int newCol)
 	{
-		/*
-		 * 
-		 * if (board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" &&
-		 * board[curRow][curCol].getHasMoved() == false && // Need to figure out
-		 * how to call custom King methods on pieces in board[][]
-		 * board[newRow][newCol].getHasMoved() == false &&
-		 * board.pathFree(curRow, curCol, newRow, newCol) == true &&
-		 * board[curRow][curCol].inCheck() == false) { // also along the same
-		 * lines, how to call board methods on board pieces
-		 * 
-		 * return true; }
-		 * 
-		 * if (board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR" &&
-		 * board[curRow][curCol].getHasMoved() == false &&
-		 * board[newRow][newCol].getHasMoved() == false &&
-		 * board.pathFree(curRow, curCol, newRow, newCol) == true &&
-		 * board[curRow][curCol].inCheck() == false) {
-		 * 
-		 * return true; }
-		 */
+		
+		
+		  if (board[curRow][curCol] == "bK" && board[newRow][newCol] == "bR" &&
+			  board[curRow][curCol].hasMoved == false && 
+			  board[newRow][newCol].getHasMoved() == false &&
+			  board.pathFree(curRow, curCol, newRow, newCol) == true &&
+		      board[curRow][curCol].inCheck() == false) { 		  
+		  return true; }
+		  
+		  if (board[curRow][curCol] == "wK" && board[newRow][newCol] == "wR" &&
+		      board[curRow][curCol].getHasMoved() == false &&
+		      board[newRow][newCol].getHasMoved() == false &&
+		      board.pathFree(curRow, curCol, newRow, newCol) == true &&
+		      board[curRow][curCol].inCheck() == false) {
+		  
+		  return true; }
+		 
 		return false;
 	}
 	public void castle(int curRow, int curCol, int newRow, int newCol)
@@ -193,15 +189,23 @@ public class Board
 		{
 			if(board[curRow][curCol] == "bK")
 			{ // check what color the castling pieces are
-				board[curRow][curCol] = "bR"; // swap
-				board[newRow][newCol] = "bK"; // MAY not suffice to change just
-												// string value, need to swap
-												// actual pieces most likely
+				
+				King k = new King("bK");
+				k = (King) board[curRow][curCol];
+				
+				board[curRow][curCol] = board[newRow][newCol]; 
+				board[newRow][newCol] = k;
+				
+				
 			}
 			if(board[curRow][curCol] == "wK")
 			{
-				board[curRow][curCol] = "wR";
-				board[newRow][newCol] = "wK";
+				King k = new King("wK");
+				k = (King) board[curRow][curCol];
+				
+				board[curRow][curCol] = board[newRow][newCol]; 
+				board[newRow][newCol] = k;
+				
 			}
 		}
 	}
