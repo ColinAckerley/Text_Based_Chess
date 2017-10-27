@@ -133,7 +133,7 @@ public class Board {
 	}
 
 	public boolean checkPawnDiag(int curRow, int curCol, int newRow, int newCol) {
-		if (board[newRow][newCol] == "  " || board[newRow][newCol] == "##") {
+		if ((board[newRow][newCol] == "  " || board[newRow][newCol] == "##") && enpassantCheck(curRow, curCol, newRow, newCol) == false) {
 			return false;
 		}
 		return true;
@@ -141,12 +141,14 @@ public class Board {
 
 	boolean castleCheckValid(int curRow, int curCol, int newRow, int newCol) {
 
+		/* 
+		 
 		if (board[curRow][curCol] == "bK" &&
 			board[newRow][newCol] == "bR" &&
-			board[curRow][curCol].getHasMoved() == false &&
-			board[newRow][newCol].getHasMoved() == false && 
+			board[curRow][curCol].getHasMoved() == false &&	   // Need to figure out how to call custom King methods on pieces in board[][]
+			board[newRow][newCol].getHasMoved() == false &&		
 			board.pathFree(curRow, curCol, newRow, newCol) == true &&
-			board[curRow][curCol].inCheck() == false) {
+			board[curRow][curCol].inCheck() == false) {			// also along the same lines, how to call board methods on board pieces
 
 			return true;
 		}
@@ -160,7 +162,7 @@ public class Board {
 
 				return true;
 			}
-
+*/
 		return false;
 	}
 
@@ -170,7 +172,7 @@ public class Board {
 
 			if (board[curRow][curCol] == "bK") { // check what color the castling pieces are
 				board[curRow][curCol] = "bR"; 	// swap
-				board[newRow][newCol] = "bK";  //
+				board[newRow][newCol] = "bK";  // MAY not suffice to change just string value, need to swap actual pieces most likely
 			}
 
 			if (board[curRow][curCol] == "wK") {
@@ -181,5 +183,101 @@ public class Board {
 		}
 
 	}
+	
+	public boolean enpassantCheck(int curRow, int curCol, int newRow, int newCol) {
 
+		if (board[curRow][curCol] == "bP" && curRow == 4) {  // Checks if BLACK piece is in the correct row for Enpassant
+
+			if (curCol == 0 && board[curRow][curCol+1] == "wP") {      // If black piece is on left edge of the board & opponent's pawn is adjacent to the right
+
+				if ((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(curRow,curCol+1) == true) { // if destination is directly below adjacent pawn
+																													//  and the last move was that pawn's double move
+					return true;
+				}
+			}
+			if (curCol == 7 && board[curRow][curCol-1] == "wP") { // edge case on right-most column of board
+
+				if ((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(curRow,curCol-1) == true) {  
+					
+				    return true;
+				}
+			}
+			if (curCol != 0 && curCol != 7 && board[curRow][curCol-1] == "wP") {  // non-edge columns with pawn to the left
+				
+				if ((newRow == curRow+1 && newCol == curCol-1) && lastMoveWasDoubleMove(curRow,curCol-1) == true) {
+					
+				return true;
+				}	
+			if (curCol != 0 && curCol != 7 && board[curRow][curCol+1] == "wP") { // non-edge columns with pawn to the right
+				
+				if ((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(curRow,curCol+1) == true) {
+					
+					return true;
+					}
+				}
+			}
+		}
+		
+		if (board[curRow][curCol] == "wP" && curRow == 3) { // Checks if WHITE piece is in the correct row for Enpassant
+															
+			if (curCol == 0 && board[curRow][curCol+1] == "bP") {
+
+				if ((newRow == curRow-1 && newCol == curCol+1) && lastMoveWasDoubleMove(curRow,curCol+1) == true) { 
+					return true;
+				}
+			}
+			if (curCol == 7 && board[curRow][curCol-1] == "bP") { 
+				if ((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(curRow,curCol-1) == true) {  
+					
+				    return true;
+				}
+			}
+			if (curCol != 0 && curCol != 7 && board[curRow][curCol-1] == "bP") { 
+				
+				if ((newRow == curRow-1 && newCol == curCol-1) && lastMoveWasDoubleMove(curRow,curCol-1) == true) {
+				return true;
+				}	
+			
+			if (curCol != 0 && curCol != 7 && board[curRow][curCol+1] == "bP") {
+				
+				if ((newRow == curRow-1 && newCol == curCol+1) && lastMoveWasDoubleMove(curRow,curCol+1) == true) {
+					
+					return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void enpassant(int curRow, int curCol, int newRow, int newCol) {
+	
+	if (enpassantCheck(curRow, curCol, newRow, newCol) == true) {
+		
+		if (board[curRow][curCol] == "bP") {
+			
+			removePiece(board[newRow-1][newCol]);
+		}
+		
+		if (board[curRow][curCol] == "wP") {
+			
+			removePiece(board[newRow+1][newCol]);
+		}		
+	}
+	
+	}
+	
+	public void removePiece(Object o) {
+			
+	}
+	
+	boolean lastMoveWasDoubleMove(int pawnRow, int pawnCol){		
+		
+		
+		// check lastMove value(?) to see if given row,column coordinates was the last move
+		// and also checks if hasMoved of Pawn piece at given coordinates is false;
+		
+		return false;
+	}
+	
 }

@@ -20,6 +20,7 @@ public class Pawn extends Piece
 			return false;}
 		
 		
+		
 		if(color == "Black")
 		{
 			if(newRow <= curRow || colDiff > 1)
