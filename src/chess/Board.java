@@ -11,29 +11,29 @@ public class Board
 	}
 	private void initBoard()
 	{
-		board[0][0] = new Rook("b");
-		board[0][1] = new Knight("b");
-		board[0][2] = new Bishop("b");
-		board[0][3] = new Queen("b");
-		board[0][4] = new King("b");
-		board[0][5] = new Bishop("b");
-		board[0][6] = new Knight("b");
-		board[0][7] = new Rook("b");
+		board[0][0] = new Rook("black");
+		board[0][1] = new Knight("black");
+		board[0][2] = new Bishop("black");
+		board[0][3] = new Queen("black");
+		board[0][4] = new King("black");
+		board[0][5] = new Bishop("black");
+		board[0][6] = new Knight("black");
+		board[0][7] = new Rook("black");
 		for(int i = 0; i < SIZE; i++)
 		{
-			board[1][i] = new Pawn("b");
+			board[1][i] = new Pawn("black");
 		}
-		board[7][0] = new Rook("w");
-		board[7][1] = new Knight("w");
-		board[7][2] = new Bishop("w");
-		board[7][3] = new Queen("w");
-		board[7][4] = new King("w");
-		board[7][5] = new Bishop("w");
-		board[7][6] = new Knight("w");
-		board[7][7] = new Rook("w");
+		board[7][0] = new Rook("white");
+		board[7][1] = new Knight("white");
+		board[7][2] = new Bishop("white");
+		board[7][3] = new Queen("white");
+		board[7][4] = new King("white");
+		board[7][5] = new Bishop("white");
+		board[7][6] = new Knight("white");
+		board[7][7] = new Rook("white");
 		for(int i = 0; i < SIZE; i++)
 		{
-			board[6][i] = new Pawn("w");
+			board[6][i] = new Pawn("white");
 		}
 	}
 	public void move(String color, String move) throws Exception
@@ -156,7 +156,10 @@ public class Board
 			break;
 		}
 		Piece curPiece = board[curRow][curCol];
-		if(!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol))
+		if(
+			!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol)
+					|| !curPiece.getColor().equalsIgnoreCase(color)
+		)
 		{
 			throw new Exception();
 		}
@@ -198,7 +201,7 @@ public class Board
 				{
 				return true;
 			}
-			Piece[][] tmpBoard = board;
+			Piece[][] tmpBoard = board.clone();
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol - 1))
 			{
 				tmpBoard[kingRow - 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
@@ -258,8 +261,11 @@ public class Board
 			for(int j = 0; j < SIZE; j++)
 			{
 				if(curBoard[i][j] != null)
-					if(curBoard[i][j].getClass().isInstance(new King(color)))
-					{
+					if(
+						curBoard[i][j].getClass().isInstance(new King(color))
+								&& curBoard[i][j].getColor().equalsIgnoreCase(color)
+						)
+						{
 						row = i;
 						col = j;
 					}
@@ -274,7 +280,7 @@ public class Board
 	{
 		if(curBoard == null)
 		{
-			curBoard = this.board;
+			curBoard = board.clone();
 		}
 		int[] tmp = getKingPos(color, curBoard); // Find the location of the
 													// color's king
@@ -284,11 +290,17 @@ public class Board
 		{
 			for(int j = 0; j < SIZE; j++)
 			{
-				// Check if the other player's can perform a move that will
-				// capture the cur player's king
-				if(curBoard[i][j].checkMoveValidity(this, i, j, kingRow, kingCol) && curBoard[i][j].getColor() != color)
+				if(curBoard[i][j] != null)
 				{
-					return true;
+					// Check if the other player's can perform a move that will
+					// capture the cur player's king
+					if(
+						curBoard[i][j].checkMoveValidity(this, i, j, kingRow, kingCol)
+								&& !curBoard[i][j].getColor().equalsIgnoreCase(color)
+						)
+						{
+						return true;
+					}
 				}
 			}
 		}
@@ -296,21 +308,24 @@ public class Board
 	}
 	boolean checkPromotion(String color)
 	{
-		if(color.equals("b"))
+		if(color.equalsIgnoreCase("black"))
 		{
 			for(int i = 0; i < SIZE; i++)
 			{
-				if(board[0][i].toString().equals("wP"))
+				if(board[0][i] != null)
 				{
-					return true;
+					if(board[0][i].toString().equalsIgnoreCase("wP"))
+					{
+						return true;
+					}
 				}
 			}
 		}
-		if(color.equals("w"))
+		if(color.equalsIgnoreCase("white"))
 		{
 			for(int i = 0; i < SIZE; i++)
 			{
-				if(board[7][i].toString().equals("bP"))
+				if(board[7][i].toString().equalsIgnoreCase("bP"))
 				{
 					return true;
 				}

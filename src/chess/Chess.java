@@ -29,6 +29,8 @@ public class Chess
 					System.out.println("draw");
 					System.exit(0);
 				}
+				else
+					drawAvail = false;
 			}
 			if(input.equalsIgnoreCase("draw?"))
 			{
@@ -49,6 +51,7 @@ public class Chess
 				if(chessBoard.inCheck(flipColor(curColor), null))
 				{
 					System.out.println("Check");
+					System.out.println();
 					printBoard = true;
 					curColor = flipColor(curColor);
 				}

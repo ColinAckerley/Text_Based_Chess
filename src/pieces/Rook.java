@@ -16,7 +16,7 @@ public class Rook extends Piece
 			return false;
 		if(rowDiff == 0)
 		{
-			for(int i = curCol; i < newCol-1; i++)
+			for(int i = curCol; i < newCol; i++)
 			{
 				if(b[curRow][i] != null)
 					return false;
@@ -24,7 +24,7 @@ public class Rook extends Piece
 		}
 		if(colDiff == 0)
 		{
-			for(int i = curRow; i < newRow-1; i++)
+			for(int i = curRow; i < newRow; i++)
 			{
 				if(b[i][curCol] != null)
 					return false;

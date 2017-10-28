@@ -17,7 +17,7 @@ public class Pawn extends Piece
 		int colDiff = Math.abs(newCol - curCol);
 		
 				
-		if(color == "b"){
+		if(color == "black"){
 					
 			if(newRow <= curRow || colDiff > 1)
 			{ // pawn can't go backwards, or move over more than one space
@@ -26,7 +26,7 @@ public class Pawn extends Piece
 			}			
 		}
 		
-		if(color == "w"){
+		if(color == "white"){
 			
 			if(newRow >= curRow || colDiff > 1)
 			{ // pawn can't go backwards, or move over more than one space

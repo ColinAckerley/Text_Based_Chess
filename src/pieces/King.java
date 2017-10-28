@@ -34,7 +34,7 @@ public class King extends Piece
 		if(
 			b[curRow][curCol].toString().equals("bK") && b[newRow][newCol].toString().equals("bR")
 					&& hasMoved == false && b[newRow][newCol].hasMoved == false
-					&& (!board.inCheck("b", null) && castlePathFree(board, curCol, newCol, "b")
+					&& (!board.inCheck("black", null) && castlePathFree(board, curCol, newCol, "black")
 		))
 		{
 			return true;
@@ -42,7 +42,7 @@ public class King extends Piece
 		if(
 			b[curRow][curCol].toString().equals("wK") && b[newRow][newCol].toString().equals("wR")
 					&& b[curRow][curCol].hasMoved == false && hasMoved == false
-					&& (!board.inCheck("w", null) && castlePathFree(board, curCol, newCol, "w")
+					&& (!board.inCheck("white", null) && castlePathFree(board, curCol, newCol, "white")
 		))
 		{
 			return true;
@@ -52,7 +52,7 @@ public class King extends Piece
 	boolean castlePathFree(Board board, int curCol, int newCol, String color)
 	{
 		Piece[][] b = board.getBoard();
-		if(color.equals("b"))
+		if(color.equals("black"))
 		{
 			if(curCol > newCol)
 			{
@@ -72,7 +72,7 @@ public class King extends Piece
 				}
 			}
 		}
-		if(color.equals("w"))
+		if(color.equals("white"))
 		{
 			if(curCol > newCol)
 			{
