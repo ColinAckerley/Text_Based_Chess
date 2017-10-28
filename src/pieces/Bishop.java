@@ -34,12 +34,14 @@ public class Bishop extends Piece
 			colOffset = -1;
 		}
 		int col = curCol + colOffset;
-		for(int row = curRow + rowOffset; row != newRow; row += rowOffset)
+		int row = curRow + rowOffset;
+		while(row != newRow)
 		{
 			if(b[row][col] != null) // If space is occupied
 			{
 				return false;
 			}
+			row += rowOffset;
 			col += colOffset;
 		}
 		return true;
