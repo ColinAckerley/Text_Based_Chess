@@ -34,16 +34,16 @@ public class King extends Piece
 		if(
 			b[curRow][curCol].toString().equals("bK") && b[newRow][newCol].toString().equals("bR")
 					&& hasMoved == false && b[newRow][newCol].hasMoved == false
-					&& (!board.inCheck("b")) && castlePathFree(board, curCol, newCol, "b")
-		)
+					&& (!board.inCheck("b", null) && castlePathFree(board, curCol, newCol, "b")
+		))
 		{
 			return true;
 		}
 		if(
 			b[curRow][curCol].toString().equals("wK") && b[newRow][newCol].toString().equals("wR")
 					&& b[curRow][curCol].hasMoved == false && hasMoved == false
-					&& (!board.inCheck("w")) && castlePathFree(board, curCol, newCol, "w")
-		)
+					&& (!board.inCheck("w", null) && castlePathFree(board, curCol, newCol, "w")
+		))
 		{
 			return true;
 		}
@@ -62,20 +62,20 @@ public class King extends Piece
 					{
 						return false;
 					}
-				}	
-			}
-			 for(int col = 5; col < 8; col++)
-				{
-					if(!b[0][col].toString().equals(null))
-					{
-						return false;
-					}
 				}
 			}
-			
+			for(int col = 5; col < 8; col++)
+			{
+				if(!b[0][col].toString().equals(null))
+				{
+					return false;
+				}
+			}
+		}
 		if(color.equals("w"))
 		{
-			if(curCol > newCol) {
+			if(curCol > newCol)
+			{
 				for(int col = 1; col < 4; col++)
 				{
 					if(!b[7][col].toString().equals(null))
@@ -83,8 +83,7 @@ public class King extends Piece
 						return false;
 					}
 				}
-			}	
-				
+			}
 			for(int col = 5; col < 7; col++)
 			{
 				if(!b[7][col].toString().equals(null))

@@ -46,26 +46,21 @@ public class Chess
 					printBoard = false;
 					continue;
 				}
-				if(chessBoard.inCheck(flipColor(curColor)))
+				if(chessBoard.inCheck(flipColor(curColor), null))
 				{
 					System.out.println("Check");
 					printBoard = true;
 					curColor = flipColor(curColor);
 				}
-				else if(chessBoard.inCheckmate().equals("false"))
+				else if(!chessBoard.inCheckmate(curColor))
 				{
 					curColor = flipColor(curColor);
 					printBoard = true;
 					continue;
 				}
-				else if(chessBoard.inCheckmate().equals("white"))
+				else if(chessBoard.inCheckmate(curColor))
 				{
-					System.out.println("Black wins");
-					System.exit(0);
-				}
-				else if(chessBoard.inCheckmate().equals("black"))
-				{
-					System.out.println("White wins");
+					System.out.println(flipColor(curColor) + " wins");
 					System.exit(0);
 				}
 			}

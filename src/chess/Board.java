@@ -5,7 +5,6 @@ public class Board
 	Piece[][] board = new Piece[8][8];
 	final int SIZE = 8;
 	public String lastMove = "";
-	
 	public Board()
 	{
 		this.initBoard();
@@ -163,9 +162,7 @@ public class Board
 		}
 		board[newRow][newCol] = curPiece;
 		board[curRow][curCol] = null;
-		
-		lastMove = newRow+","+newCol;
-		
+		lastMove = newRow + "," + newCol;
 		if(checkPromotion(color))
 		{
 			if(move.trim().length() > 5)
@@ -180,12 +177,121 @@ public class Board
 				promote('Q', newRow, newCol, color);
 		}
 	}
-	String inCheckmate()
+	boolean inCheckmate(String color)
 	{
-		return "false";
+		int[] tmp = getKingPos(color, board); // Find the location of the
+												// color's king
+		int kingRow = tmp[0];
+		int kingCol = tmp[1];
+		if(inCheck(color, board))
+		{
+			if(
+				!board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol + 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol + 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol + 1)
+				)
+				{
+				return true;
+			}
+			Piece[][] tmpBoard = board;
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol - 1))
+			{
+				tmpBoard[kingRow - 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol))
+			{
+				tmpBoard[kingRow - 1][kingCol] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol + 1))
+			{
+				tmpBoard[kingRow - 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol - 1))
+			{
+				tmpBoard[kingRow][kingCol - 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol + 1))
+			{
+				tmpBoard[kingRow][kingCol + 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol - 1))
+			{
+				tmpBoard[kingRow + 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol))
+			{
+				tmpBoard[kingRow + 1][kingCol] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol + 1))
+			{
+				tmpBoard[kingRow + 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
+				if(inCheck(color, tmpBoard))
+					return true;
+			}
+		}
+		return false;
 	}
-	public boolean inCheck(String color)
+	private int[] getKingPos(String color, Piece[][] curBoard)
 	{
+		int col = 0, row = 0;
+		for(int i = 0; i < SIZE; i++)
+		{
+			for(int j = 0; j < SIZE; j++)
+			{
+				if(curBoard[i][j] != null)
+					if(curBoard[i][j].getClass().isInstance(new King(color)))
+					{
+						row = i;
+						col = j;
+					}
+			}
+		}
+		int[] kingPos = new int[2];
+		kingPos[0] = row;
+		kingPos[1] = col;
+		return kingPos;
+	}
+	public boolean inCheck(String color, Piece[][] curBoard)
+	{
+		if(curBoard == null)
+		{
+			curBoard = this.board;
+		}
+		int[] tmp = getKingPos(color, curBoard); // Find the location of the
+													// color's king
+		int kingRow = tmp[0];
+		int kingCol = tmp[1];
+		for(int i = 0; i < SIZE; i++) // Go through the whole board
+		{
+			for(int j = 0; j < SIZE; j++)
+			{
+				// Check if the other player's can perform a move that will
+				// capture the cur player's king
+				if(curBoard[i][j].checkMoveValidity(this, i, j, kingRow, kingCol) && curBoard[i][j].getColor() != color)
+				{
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 	boolean checkPromotion(String color)
