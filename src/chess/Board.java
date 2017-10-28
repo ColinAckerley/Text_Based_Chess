@@ -182,6 +182,7 @@ public class Board
 	}
 	boolean inCheckmate(String color)
 	{
+		boolean a = false, b = false, c = false, d = false, e = false, f = false, g = false, h = false;
 		int[] tmp = getKingPos(color, board); // Find the location of the
 												// color's king
 		int kingRow = tmp[0];
@@ -206,51 +207,54 @@ public class Board
 			{
 				tmpBoard[kingRow - 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					a = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol))
 			{
 				tmpBoard[kingRow - 1][kingCol] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					b = true;
+				;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol + 1))
 			{
 				tmpBoard[kingRow - 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					c = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol - 1))
 			{
 				tmpBoard[kingRow][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					d = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol + 1))
 			{
 				tmpBoard[kingRow][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					e = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol - 1))
 			{
 				tmpBoard[kingRow + 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					f = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol))
 			{
 				tmpBoard[kingRow + 1][kingCol] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					g = true;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol + 1))
 			{
 				tmpBoard[kingRow + 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
-					return true;
+					h = true;
 			}
 		}
+		if(a && b && c && d && e &&f && g && h)
+			return true;
 		return false;
 	}
 	private int[] getKingPos(String color, Piece[][] curBoard)
