@@ -15,48 +15,43 @@ public class Pawn extends Piece
 		Piece[][] b = board.getBoard();
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
+		
+				
+		if(color == "b"){
 					
-		if(color == "b")
-		{
 			if(newRow <= curRow || colDiff > 1)
 			{ // pawn can't go backwards, or move over more than one space
 				// column-wise
 				return false;
-			}
-			if(hasMoved == true && rowDiff > 1)
-			{ // pawn can't move up more than one space if it has already moved
-				return false;
-			}
-			if(hasMoved == false && rowDiff > 2)
-			{ // pawn can't move up more than two spaces, if first move
-				return false;
-			}
-			
+			}			
 		}
-		if(color == "w")
-		{
+		
+		if(color == "w"){
+			
 			if(newRow >= curRow || colDiff > 1)
 			{ // pawn can't go backwards, or move over more than one space
 				// column-wise
 				return false;
-			}
-			if(hasMoved == true && rowDiff > 1)
-			{
-				return false;
-			}
-			if(hasMoved == false && rowDiff > 2)
-			{
-				return false;
-			}
-			
+			}		
 		}
-		if(colDiff == 1)
+		
+		if(hasMoved == true && rowDiff > 1) 
+		{
+			return false;
+		}
+		if(hasMoved == false && rowDiff > 2)
+		{
+			return false;
+		}	
+		
+		if(colDiff==1)
 		{
 			return checkPawnDiag(board,b,curRow, curCol, newRow, newCol);
 		}
-		if(hasMoved == true && !b[newRow][newCol].toString().equals(null)) {
+		
+		if (b[newRow][newCol] != null) {
 			return false;
-			}
+		}		
 		this.hasMoved = true;
 		return true;
 		
@@ -64,7 +59,7 @@ public class Pawn extends Piece
 	
 	public boolean checkPawnDiag(Board board, Piece[][] b,int curRow, int curCol, int newRow, int newCol)
 	{
-		if((b[newRow][newCol].toString().equals(null))) {
+		if((b[newRow][newCol].equals(null)) && !enpassantCheck(board,b,curRow,curCol,newRow,newCol)) {
 			return false;
 		}
 		return true;
@@ -142,8 +137,8 @@ public class Pawn extends Piece
 
 	boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int pawnRow, int pawnCol) {
 		
-		if (b[pawnRow][pawnCol].hasMoved == false) {
-
+		if (b[pawnRow][pawnCol].hasMoved == false && board.lastMove.equals(pawnRow+","+pawnCol)) {
+			
 			return true;
 		}
 		

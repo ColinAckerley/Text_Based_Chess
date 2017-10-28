@@ -4,6 +4,8 @@ public class Board
 {
 	Piece[][] board = new Piece[8][8];
 	final int SIZE = 8;
+	public String lastMove = "";
+	
 	public Board()
 	{
 		this.initBoard();
@@ -161,6 +163,9 @@ public class Board
 		}
 		board[newRow][newCol] = curPiece;
 		board[curRow][curCol] = null;
+		
+		lastMove = newRow+","+newCol;
+		
 		if(checkPromotion(color))
 		{
 			if(move.trim().length() > 5)
