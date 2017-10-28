@@ -253,7 +253,7 @@ public class Board
 					h = true;
 			}
 		}
-		if(a && b && c && d && e &&f && g && h)
+		if(a && b && c && d && e && f && g && h)
 			return true;
 		return false;
 	}
