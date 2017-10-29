@@ -4,6 +4,7 @@ public class Pawn extends Piece
 {
 	String color;
 	boolean hasMoved;
+		
 	public Pawn(String color)
 	{
 		this.color = color;
@@ -42,7 +43,7 @@ public class Pawn extends Piece
 		}
 		if(colDiff == 1)
 		{
-			return checkPawnDiag(board, b, curRow, curCol, newRow, newCol);
+			return checkPawnDiag(board, b, curRow, curCol, newRow, newCol); 
 		}
 		if(b[newRow][newCol] != null)
 		{
@@ -53,110 +54,102 @@ public class Pawn extends Piece
 	}
 	public boolean checkPawnDiag(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
-		if((b[newRow][newCol].equals(null)) && !enpassantCheck(board, b, curRow, curCol, newRow, newCol))
+		if((b[newRow][newCol] == null  && !enpassantCheck(board, b, curRow, curCol, newRow, newCol)))
 		{
 			return false;
 		}
+		
 		return true;
 	}
-	public boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
-	{
-		if(b[curRow][curCol].toString().equals("bP") && curRow == 4)
-		{ // Checks if BLACK piece is in the correct row for Enpassant
-			if(curCol == 0 && b[curRow][curCol + 1].toString().equals("wP"))
-			{ // If black piece is on left edge of the board & opponent's pawn
-				// is adjacent to the right
-				if(
-					(newRow == curRow + 1 && newCol == curCol + 1)
+	public boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol) {
+
+		if (b[curRow][curCol].toString().equals("bP") && curRow == 4) { // Checks if BLACK piece is in the correct row
+																		// for Enpassant
+			if (curCol == 0 && b[curRow][curCol + 1] != null) { // If black piece is on left edge of the board &
+																// opponent's pawn
+																// is adjacent to the right
+				if ((newRow == curRow + 1 && newCol == curCol + 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
+						&& b[curRow][curCol + 1].toString().equals("wP")) { // if destination is directly below adjacent
+																			// pawn
+																			// and the last move was that pawn's double
+																			// move
+					return true;
+				}
+			}
+			if (curCol == 7 && b[curRow][curCol - 1] != null) { // edge case on right-most column of board
+				if ((newRow == curRow + 1 && newCol == curCol - 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
+						&& b[curRow][curCol - 1].toString().equals("wP")) {
+					return true;
+				}
+			}
+			if (curCol != 0 && curCol != 7 && b[curRow][curCol - 1] != null) { // non-edge columns with pawn to the left
+				if ((newRow == curRow + 1 && newCol == curCol - 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
+						&& b[curRow][curCol - 1].toString().equals("wP")) {
+					
+					return true;
+				}
+				if (curCol != 0 && curCol != 7 && b[curRow][curCol + 1] != null) { // non-edge columns with pawn to the
+																					// right
+					if ((newRow == curRow + 1 && newCol == curCol + 1)
 							&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
-					)
-					{ // if destination is directly below adjacent pawn
-						// and the last move was that pawn's double move
-					return true;
-				}
-			}
-			if(curCol == 7 && b[curRow][curCol - 1].toString().equals("wP"))
-			{ // edge case on right-most column of board
-				if(
-					(newRow == curRow + 1 && newCol == curCol - 1)
-							&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
-					)
-					{
-					return true;
-				}
-			}
-			if(curCol != 0 && curCol != 7 && b[curRow][curCol - 1].toString().equals("wP"))
-			{ // non-edge columns with pawn to the left
-				if(
-					(newRow == curRow + 1 && newCol == curCol - 1)
-							&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
-					)
-					{
-					return true;
-				}
-				if(curCol != 0 && curCol != 7 && b[curRow][curCol + 1].toString().equals("wP"))
-				{ // non-edge columns with pawn to the right
-					if(
-						(newRow == curRow + 1 && newCol == curCol + 1)
-								&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
-						)
-						{
+							&& b[curRow][curCol + 1].toString().equals("wP")) {
+					
 						return true;
 					}
 				}
 			}
 		}
-		if(b[curRow][curCol].toString().equals("wP") && curRow == 3)
-		{ // Checks if WHITE piece is in the correct row for Enpassant
-			if(curCol == 0 && b[curRow][curCol + 1].toString().equals("bP"))
-			{
-				if(
-					(newRow == curRow - 1 && newCol == curCol + 1)
-							&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
-					)
-					{
+
+		if (b[curRow][curCol].toString().equals("wP") && curRow == 3) {
+
+			if (curCol == 0 && b[curRow][curCol + 1] != null) {
+				if ((newRow == curRow - 1 && newCol == curCol + 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
+						&& b[curRow][curCol + 1].toString().equals("bP")) {
+				
 					return true;
 				}
 			}
-			if(curCol == 7 && b[curRow][curCol - 1].toString().equals("bP"))
-			{
-				if(
-					(newRow == curRow - 1 && newCol == curCol - 1)
-							&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
-					)
-					{
+
+			if (curCol == 7 && b[curRow][curCol - 1] != null) {
+				if ((newRow == curRow - 1 && newCol == curCol - 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
+						&& b[curRow][curCol - 1].toString().equals("bP")) {
+					
 					return true;
 				}
 			}
-			if(curCol != 0 && curCol != 7 && b[curRow][curCol - 1].toString().equals("bP"))
-			{
-				if(
-					(newRow == curRow - 1 && newCol == curCol - 1)
-							&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
-					)
-					{
+
+			if (curCol != 0 && curCol != 7 && b[curRow][curCol - 1] != null) {
+				if ((newRow == curRow - 1 && newCol == curCol - 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol - 1)
+						&& b[curRow][curCol - 1].toString().equals("bP")) {
+					
 					return true;
 				}
-				if(curCol != 0 && curCol != 7 && b[curRow][curCol + 1].toString().equals("bP"))
-				{
-					if(
-						(newRow == curRow - 1 && newCol == curCol + 1)
-								&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
-						)
-						{
-						return true;
-					}
+
+			}
+			if (curCol != 0 && curCol != 7 && b[curRow][curCol + 1] != null) {
+				if ((newRow == curRow - 1 && newCol == curCol + 1)
+						&& lastMoveWasDoubleMove(board, b, curRow, curCol + 1)
+						&& b[curRow][curCol + 1].toString().equals("bP")) {
+					return true;
 				}
 			}
 		}
 		return false;
 	}
-	boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int pawnRow, int pawnCol)
+	boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int curRow, int curCol)
 	{
-		if(b[pawnRow][pawnCol].hasMoved == false && board.lastMove.equals(pawnRow + "," + pawnCol))
+		 if(((board.startingRow == 1) || (board.startingRow == 6)) && board.lastMove.equalsIgnoreCase(curRow+","+curCol))
 		{
 			return true;
 		}
+		
+		
 		return false;
 	}
 	public String getColor()

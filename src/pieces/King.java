@@ -15,6 +15,13 @@ public class King extends Piece
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
+		
+		if (castleCheckValid(board, b, curRow, curCol, newRow, newCol)) {
+			
+			return true;
+			
+		}		
+		
 		if(colDiff > 1 || rowDiff > 1)
 			return false;
 		if(newRow < 0 || newCol < 0 || newRow > 7 || newCol > 7)
@@ -34,6 +41,8 @@ public class King extends Piece
 	}
 	boolean castleCheckValid(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
+		if(b[newRow][newCol] != null) {
+		
 		if(
 			b[curRow][curCol].toString().equalsIgnoreCase("bK") && b[newRow][newCol].toString().equalsIgnoreCase("bR")
 					&& hasMoved == false && b[newRow][newCol].hasMoved == false
@@ -50,6 +59,8 @@ public class King extends Piece
 		{
 			return true;
 		}
+		
+		}
 		return false;
 	}
 	boolean castlePathFree(Board board, Piece[][] b, int curCol, int newCol, String color)
@@ -60,19 +71,22 @@ public class King extends Piece
 			{
 				for(int col = 1; col < 4; col++)
 				{
-					if(!b[0][col].toString().equalsIgnoreCase(null))
+					if(b[0][col] != null)
 					{
 						return false;
 					}
 				}
 			}
-			for(int col = 5; col < 8; col++)
+			
+			if(curCol < newCol) {
+			for(int col = 5; col < 7; col++)
 			{
-				if(!b[0][col].toString().equalsIgnoreCase(null))
+				if(b[0][col] != null)
 				{
 					return false;
 				}
 			}
+		}
 		}
 		if(color.equalsIgnoreCase("white"))
 		{
@@ -80,19 +94,23 @@ public class King extends Piece
 			{
 				for(int col = 1; col < 4; col++)
 				{
-					if(!b[7][col].toString().equalsIgnoreCase(null))
+					if(b[7][col] != null)
 					{
 						return false;
 					}
 				}
 			}
+			
+			if (curCol < newCol) {
+			
 			for(int col = 5; col < 7; col++)
 			{
-				if(!b[7][col].toString().equalsIgnoreCase(null))
+				if(b[7][col] != null)
 				{
 					return false;
 				}
 			}
+		}
 		}
 		return true;
 	}

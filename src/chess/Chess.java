@@ -42,6 +42,7 @@ public class Chess
 				try
 				{
 					chessBoard.move(curColor, input);
+										
 					if(chessBoard.inCheckmate(curColor))
 					{
 						System.out.println(flipColor(curColor) + " wins");

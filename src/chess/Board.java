@@ -5,7 +5,8 @@ public class Board
 {
 	Piece[][] board = new Piece[8][8];
 	final int SIZE = 8;
-	public String lastMove = "";
+	public String lastMove;
+	public int startingRow;
 	public Board()
 	{
 		this.initBoard();
@@ -164,8 +165,9 @@ public class Board
 		{
 			throw new IOException();
 		}
-		board[newRow][newCol] = curPiece;
+		board[newRow][newCol] = curPiece;	
 		board[curRow][curCol] = null;
+		startingRow = curRow;
 		lastMove = newRow + "," + newCol;
 		if(checkPromotion(color))
 		{
