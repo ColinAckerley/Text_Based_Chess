@@ -17,6 +17,11 @@ public class King extends Piece
 		int colDiff = Math.abs(curCol - newCol);
 		if(colDiff > 1 || rowDiff > 1)
 			return false;
+		if(newRow < 0 || newCol < 0 || newRow >= board.getSize() || newCol >= board.getSize())
+			return false;
+		if(b[newRow][newCol] != null)
+			if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))
+				return false;
 		return true;
 	}
 	public String getColor()
@@ -32,16 +37,16 @@ public class King extends Piece
 		if(
 			b[curRow][curCol].toString().equalsIgnoreCase("bK") && b[newRow][newCol].toString().equalsIgnoreCase("bR")
 					&& hasMoved == false && b[newRow][newCol].hasMoved == false
-					&& (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black")
-		))
+					&& (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black"))
+		)
 		{
 			return true;
 		}
 		if(
 			b[curRow][curCol].toString().equalsIgnoreCase("wK") && b[newRow][newCol].toString().equalsIgnoreCase("wR")
 					&& b[curRow][curCol].hasMoved == false && hasMoved == false
-					&& (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white")
-		))
+					&& (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white"))
+		)
 		{
 			return true;
 		}

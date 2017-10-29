@@ -11,6 +11,9 @@ public class Pawn extends Piece
 	}
 	public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
+		if(b[newRow][newCol] != null)
+			if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))
+				return false;
 		int rowDiff = Math.abs(newRow - curRow);
 		int colDiff = Math.abs(newCol - curCol);
 		if(color == "black")

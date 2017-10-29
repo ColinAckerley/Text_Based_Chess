@@ -44,6 +44,11 @@ public class Chess
 				}
 				catch (Exception c)
 				{
+					if(chessBoard.inCheckmate(curColor))
+					{
+						System.out.println(flipColor(curColor) + " wins");
+						System.exit(0);
+					}
 					System.out.println("Illegal move, try again\n");
 					printBoard = false;
 					continue;
