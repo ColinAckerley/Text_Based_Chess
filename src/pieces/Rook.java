@@ -18,22 +18,27 @@ public class Rook extends Piece
 			return false;
 		if(rowDiff == 0)
 		{
-			for(int i = curCol + 1; i < newCol; i++)
-			{
+			int offset;
+			if(curCol < newCol)
+				offset = 1;
+			else
+				offset = -1;
+			for(int i = curCol + offset; i != newCol; i += offset)
 				if(b[curRow][i] != null)
 					return false;
-			}
 		}
 		if(colDiff == 0)
 		{
-			for(int i = curRow + 1; i < newRow; i++)
-			{
+			int offset;
+			if(curRow < newRow)
+				offset = 1;
+			else
+				offset = -1;
+			for(int i = curRow + offset; i != newRow; i += offset)
 				if(b[i][curCol] != null)
-				{
 					return false;
-				}
-			}
 		}
+		hasMoved = true;
 		return true;
 	}
 	public String getColor()

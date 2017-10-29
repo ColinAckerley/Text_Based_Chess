@@ -162,11 +162,39 @@ public class Board
 			!curPiece.checkMoveValidity(this, board, curRow, curCol, newRow, newCol)
 					|| !curPiece.getColor().equalsIgnoreCase(color)
 		)
-		{
 			throw new IOException();
+		if(board[newRow][newCol] != null)
+		{ // if you are moving to an occupied space
+			if(
+				(board[curRow][curCol].toString().contains("wK") && board[newRow][newCol].toString().contains("wR"))
+						|| (board[curRow][curCol].toString().contains("bK")
+								&& board[newRow][newCol].toString().contains("bR"))
+			)
+			{
+				Piece temp = board[newRow][newCol]; // set a temp piece that is
+													// that rook
+				board[newRow][newCol] = curPiece; // king in rook's spot
+				board[curRow][curCol] = temp; // rook in king's spot
+			}
 		}
-		board[newRow][newCol] = curPiece;
-		board[curRow][curCol] = null;
+		else if(
+			board[newRow][newCol] == null
+					&& (board[curRow][curCol].toString().equalsIgnoreCase("wP")
+							|| board[curRow][curCol].toString().equalsIgnoreCase("bP"))
+			)
+			{ // if a piece moves to an empty space
+				// and it's a pawn that made through its validity check (aka
+				// enpassant move)
+			board[newRow][newCol] = curPiece; // move the pawn
+			board[curRow][newCol] = null; // remove the opponents pawn from
+											// board
+			board[curRow][curCol] = null; // and empty the space you came from
+		}
+		else
+		{
+			board[newRow][newCol] = curPiece;
+			board[curRow][curCol] = null;
+		}
 		startingRow = curRow;
 		lastMove = newRow + "," + newCol;
 		if(checkPromotion(color))
@@ -174,13 +202,11 @@ public class Board
 			if(move.trim().length() > 5)
 			{
 				if(!checkPromotion(color))
-				{
 					throw new IOException();
-				}
-				promote(move.trim().charAt(6), newRow, newCol, color);
+				promote(Character.toString(move.trim().charAt(6)), newRow, newCol, color);
 			}
 			else
-				promote('Q', newRow, newCol, color);
+				promote("Q", newRow, newCol, color);
 		}
 	}
 	boolean inCheckmate(String color)
@@ -324,8 +350,8 @@ public class Board
 						{
 						row = i;
 						col = j;
-					}
-			}
+						}
+						}
 		}
 		int[] kingPos = new int[2];
 		kingPos[0] = row;
@@ -363,53 +389,33 @@ public class Board
 						}
 						}
 						return false;
-	}
-	boolean checkPromotion(String color)
+						}
+						boolean checkPromotion(String color)
 	{
-		if(color.equalsIgnoreCase("black"))
-		{
+		if(color.equalsIgnoreCase("white"))
 			for(int i = 0; i < SIZE; i++)
-			{
 				if(board[0][i] != null)
 					if(board[0][i].toString().equalsIgnoreCase("wP"))
-					{
 						return true;
-					}
-			}
-		}
-		if(color.equalsIgnoreCase("white"))
-		{
+		if(color.equalsIgnoreCase("black"))
 			for(int i = 0; i < SIZE; i++)
-			{
 				if(board[7][i] != null)
 					if(board[7][i].toString().equalsIgnoreCase("bP"))
-					{
 						return true;
-					}
-			}
-		}
 		return false;
 	}
-	public void promote(char desiredPiece, int newRow, int newCol, String color)
+	public void promote(String desiredPiece, int newRow, int newCol, String color)
 	{
 		if(checkPromotion(color))
 		{
-			if(desiredPiece == 'R')
-			{
-				board[newRow][newCol] = new Rook(color);
-			}
-			if(desiredPiece == 'N')
-			{
-				board[newRow][newCol] = new Knight(color);
-			}
-			if(desiredPiece == 'Q')
-			{
-				board[newRow][newCol] = new Queen(color);
-			}
-			if(desiredPiece == 'B')
-			{
-				board[newRow][newCol] = new Bishop(color);
-			}
+			if(desiredPiece.equalsIgnoreCase("R"))
+				board[newRow][newCol] = new Rook(color.toLowerCase());
+			if(desiredPiece.equalsIgnoreCase("N"))
+				board[newRow][newCol] = new Knight(color.toLowerCase());
+			if(desiredPiece.equalsIgnoreCase("Q"))
+				board[newRow][newCol] = new Queen(color.toLowerCase());
+			if(desiredPiece.equalsIgnoreCase("B"))
+				board[newRow][newCol] = new Bishop(color.toLowerCase());
 		}
 	}
 	public String toString()

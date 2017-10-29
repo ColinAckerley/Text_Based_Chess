@@ -45,11 +45,13 @@ public class Chess
 										
 					if(chessBoard.inCheckmate(curColor))
 					{
+						System.out.println(chessBoard);
 						System.out.println(flipColor(curColor) + " wins");
 						System.exit(0);
 					}
 					if(chessBoard.inCheckmate(flipColor(curColor)))
 					{
+						System.out.println(chessBoard);
 						System.out.println(curColor + " wins");
 						System.exit(0);
 					}

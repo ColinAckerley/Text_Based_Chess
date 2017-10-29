@@ -15,22 +15,19 @@ public class King extends Piece
 	{
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
-		
 		if(newRow < 0 || newCol < 0 || newRow > 7 || newCol > 7)
-			return false;		
-		
-		if (castleCheckValid(board, b, curRow, curCol, newRow, newCol)) {
-			
+			return false;
+		if(castleCheckValid(board, b, curRow, curCol, newRow, newCol))
+		{
+			hasMoved = true;
 			return true;
-			
-		}		
-		
+		}
 		if(colDiff > 1 || rowDiff > 1)
 			return false;
-		
 		if(b[newRow][newCol] != null)
 			if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))
 				return false;
+		hasMoved = true;
 		return true;
 	}
 	public String getColor()
@@ -43,25 +40,26 @@ public class King extends Piece
 	}
 	boolean castleCheckValid(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
-		if(b[newRow][newCol] != null) {
-		
-		if(
-			b[curRow][curCol].toString().equalsIgnoreCase("bK") && b[newRow][newCol].toString().equalsIgnoreCase("bR")
-					&& hasMoved == false && b[newRow][newCol].hasMoved == false
-					&& (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black"))
-		)
+		if(b[newRow][newCol] != null)
 		{
-			return true;
-		}
-		if(
-			b[curRow][curCol].toString().equalsIgnoreCase("wK") && b[newRow][newCol].toString().equalsIgnoreCase("wR")
-					&& b[curRow][curCol].hasMoved == false && hasMoved == false
-					&& (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white"))
-		)
-		{
-			return true;
-		}
-		
+			if(
+				b[curRow][curCol].toString().equalsIgnoreCase("bK")
+						&& b[newRow][newCol].toString().equalsIgnoreCase("bR") && hasMoved == false
+						&& b[newRow][newCol].hasMoved == false
+						&& (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black"))
+			)
+			{
+				return true;
+			}
+			if(
+				b[curRow][curCol].toString().equalsIgnoreCase("wK")
+						&& b[newRow][newCol].toString().equalsIgnoreCase("wR") && b[newRow][newCol].hasMoved == false
+						&& hasMoved == false
+						&& (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white"))
+			)
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -79,16 +77,16 @@ public class King extends Piece
 					}
 				}
 			}
-			
-			if(curCol < newCol) {
-			for(int col = 5; col < 7; col++)
+			if(curCol < newCol)
 			{
-				if(b[0][col] != null)
+				for(int col = 5; col < 7; col++)
 				{
-					return false;
+					if(b[0][col] != null)
+					{
+						return false;
+					}
 				}
 			}
-		}
 		}
 		if(color.equalsIgnoreCase("white"))
 		{
@@ -102,17 +100,16 @@ public class King extends Piece
 					}
 				}
 			}
-			
-			if (curCol < newCol) {
-			
-			for(int col = 5; col < 7; col++)
+			if(curCol < newCol)
 			{
-				if(b[7][col] != null)
+				for(int col = 5; col < 7; col++)
 				{
-					return false;
+					if(b[7][col] != null)
+					{
+						return false;
+					}
 				}
 			}
-		}
 		}
 		return true;
 	}
