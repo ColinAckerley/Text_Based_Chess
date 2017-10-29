@@ -1,4 +1,5 @@
 package chess;
+import java.io.IOException;
 import pieces.*;
 public class Board
 {
@@ -36,7 +37,7 @@ public class Board
 			board[6][i] = new Pawn("white");
 		}
 	}
-	public void move(String color, String move) throws Exception
+	public void move(String color, String move) throws IOException
 	{
 		int curRow = 0, newRow = 0, curCol = 0, newCol = 0;
 		String curPos = move.substring(0, 2);
@@ -161,7 +162,7 @@ public class Board
 					|| !curPiece.getColor().equalsIgnoreCase(color)
 		)
 		{
-			throw new Exception();
+			throw new IOException();
 		}
 		board[newRow][newCol] = curPiece;
 		board[curRow][curCol] = null;
@@ -172,7 +173,7 @@ public class Board
 			{
 				if(!checkPromotion(color))
 				{
-					throw new Exception();
+					throw new IOException();
 				}
 				promote(move.trim().charAt(6), newRow, newCol, color);
 			}
@@ -204,10 +205,11 @@ public class Board
 							kingCol + 1)
 			)
 			return true;
-			Piece[][] tmpBoard = board.clone(); // Try all of the king's
-												// possible moves on a temp
-												// board. If he always ends up
-												// in check, checkmate
+			Piece[][] tmpBoard = new Piece[SIZE][];
+			for(int i = 0; i < SIZE; i++)
+			{
+				tmpBoard[i] = board[i].clone();
+			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol - 1))
 			{
 				Piece curPiece = tmpBoard[kingRow][kingCol]; // The king
@@ -350,7 +352,11 @@ public class Board
 	{
 		if(curBoard == null)
 		{
-			curBoard = board.clone();
+			curBoard = new Piece[SIZE][];
+			for(int i = 0; i < SIZE; i++)
+			{
+				curBoard[i] = board[i].clone();
+			}
 		}
 		int[] tmp = getKingPos(color, curBoard); // Find the location of the
 													// color's king
@@ -368,14 +374,12 @@ public class Board
 						curBoard[i][j].checkMoveValidity(this, curBoard, i, j, kingRow, kingCol)
 								&& !curBoard[i][j].getColor().equalsIgnoreCase(color)
 						)
-						{
 						return true;
 						}
 						}
 						}
-		}
-		return false;
-	}
+						return false;
+						}
 	boolean checkPromotion(String color)
 	{
 		if(color.equalsIgnoreCase("black"))
@@ -383,22 +387,21 @@ public class Board
 			for(int i = 0; i < SIZE; i++)
 			{
 				if(board[0][i] != null)
-				{
 					if(board[0][i].toString().equalsIgnoreCase("wP"))
 					{
 						return true;
 					}
-				}
 			}
 		}
 		if(color.equalsIgnoreCase("white"))
 		{
 			for(int i = 0; i < SIZE; i++)
 			{
-				if(board[7][i].toString().equalsIgnoreCase("bP"))
-				{
-					return true;
-				}
+				if(board[7][i] != null)
+					if(board[7][i].toString().equalsIgnoreCase("bP"))
+					{
+						return true;
+					}
 			}
 		}
 		return false;

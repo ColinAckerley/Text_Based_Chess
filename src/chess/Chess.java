@@ -1,4 +1,5 @@
 package chess;
+import java.io.IOException;
 import java.util.Scanner;
 public class Chess
 {
@@ -65,7 +66,7 @@ public class Chess
 						continue;
 					}
 				}
-				catch (Exception c)
+				catch (IOException e)
 				{
 					System.out.println("Illegal move, try again\n");
 					printBoard = false;
