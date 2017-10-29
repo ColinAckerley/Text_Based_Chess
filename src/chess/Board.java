@@ -162,7 +162,9 @@ public class Board
 			!curPiece.checkMoveValidity(this, board, curRow, curCol, newRow, newCol)
 					|| !curPiece.getColor().equalsIgnoreCase(color)
 		)
-			throw new IOException();
+			throw new IOException(); 
+		
+		
 		if(board[newRow][newCol] != null)
 		{ // if you are moving to an occupied space
 			if(
@@ -210,7 +212,7 @@ public class Board
 		}
 	}
 	boolean inCheckmate(String color)
-	{
+	{ /*
 		boolean a = false, b = false, c = false, d = false, e = false, f = false, g = false, h = false;
 		int[] tmp = getKingPos(color, board); // Find the location of the
 												// color's king
@@ -333,6 +335,9 @@ public class Board
 				h = true;
 		if(a && b && c && d && e && f && g && h)
 			return true;
+			
+			*/
+			
 		return false;
 	}
 	private int[] getKingPos(String color, Piece[][] curBoard)
@@ -359,7 +364,7 @@ public class Board
 		return kingPos;
 	}
 	public boolean inCheck(String color, Piece[][] curBoard)
-	{
+	{ 
 		if(curBoard == null)
 		{
 			curBoard = new Piece[SIZE][];
@@ -388,9 +393,12 @@ public class Board
 						}
 						}
 						}
+					
+						
 						return false;
 						}
-						boolean checkPromotion(String color)
+	
+	boolean checkPromotion(String color)
 	{
 		if(color.equalsIgnoreCase("white"))
 			for(int i = 0; i < SIZE; i++)
@@ -402,7 +410,11 @@ public class Board
 				if(board[7][i] != null)
 					if(board[7][i].toString().equalsIgnoreCase("bP"))
 						return true;
+						
+					
 		return false;
+		
+		
 	}
 	public void promote(String desiredPiece, int newRow, int newCol, String color)
 	{

@@ -3,9 +3,11 @@ import chess.Board;
 public class Rook extends Piece
 {
 	String color;
+	boolean hasMoved;
 	public Rook(String color)
 	{
 		this.color = color;
+		this.hasMoved = false;
 	}
 	public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
@@ -38,6 +40,7 @@ public class Rook extends Piece
 				if(b[i][curCol] != null)
 					return false;
 		}
+		
 		hasMoved = true;
 		return true;
 	}
