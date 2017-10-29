@@ -17,7 +17,7 @@ public class King extends Piece
 		int colDiff = Math.abs(curCol - newCol);
 		if(colDiff > 1 || rowDiff > 1)
 			return false;
-		if(newRow < 0 || newCol < 0 || newRow >= board.getSize() || newCol >= board.getSize())
+		if(newRow < 0 || newCol < 0 || newRow > 7 || newCol > 7)
 			return false;
 		if(b[newRow][newCol] != null)
 			if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))

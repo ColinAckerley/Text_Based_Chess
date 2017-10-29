@@ -189,36 +189,42 @@ public class Board
 		int kingCol = tmp[1];
 		if(inCheck(color, board))
 		{
-			if(
-				!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1,
-								kingCol)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1,
-								kingCol + 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow,
-								kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow,
-								kingCol + 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
-								kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
-								kingCol)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
-								kingCol + 1)
-				)
-				return true;
-			Piece[][] tmpBoard = board.clone();
+			if( // Checks to see if the king can move at all, if he can't, he is
+				// in checkmate
+			!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol - 1)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1,
+							kingCol + 1)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow, kingCol - 1)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow, kingCol + 1)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
+							kingCol - 1)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1, kingCol)
+					&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
+							kingCol + 1)
+			)
+			return true;
+			Piece[][] tmpBoard = board.clone(); // Try all of the king's
+												// possible moves on a temp
+												// board. If he always ends up
+												// in check, checkmate
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol - 1))
 			{
-				Piece curPiece = tmpBoard[kingRow][kingCol];
-				tmpBoard[kingRow - 1][kingCol - 1] = curPiece;
-				tmpBoard[kingRow][kingCol] = null;
-				if(inCheck(color, tmpBoard))
+				Piece curPiece = tmpBoard[kingRow][kingCol]; // The king
+				tmpBoard[kingRow - 1][kingCol - 1] = curPiece; // Testing move,
+																// put king
+																// there
+				tmpBoard[kingRow][kingCol] = null; // Remove the king from his
+													// current spot
+				if(inCheck(color, tmpBoard)) // If he is still in check
 				{
 					System.out.println("a is true");
-					a = true;
+					a = true; // Part of a chain of booleans to determine
+								// checkmate if he can't move without check
+								// occuring
 				}
-				tmpBoard[kingRow - 1][kingCol - 1] = null;
+				tmpBoard[kingRow - 1][kingCol - 1] = null; // Reset back to
+															// beginning
 				tmpBoard[kingRow][kingCol] = curPiece;
 			}
 			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol))
@@ -364,9 +370,9 @@ public class Board
 						)
 						{
 						return true;
-					}
-				}
-			}
+						}
+						}
+						}
 		}
 		return false;
 	}

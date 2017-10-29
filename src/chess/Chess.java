@@ -41,35 +41,35 @@ public class Chess
 				try
 				{
 					chessBoard.move(curColor, input);
-				}
-				catch (Exception c)
-				{
 					if(chessBoard.inCheckmate(curColor))
 					{
 						System.out.println(flipColor(curColor) + " wins");
 						System.exit(0);
 					}
+					if(chessBoard.inCheckmate(flipColor(curColor)))
+					{
+						System.out.println(curColor + " wins");
+						System.exit(0);
+					}
+					if(chessBoard.inCheck(flipColor(curColor), null))
+					{
+						System.out.println("Check");
+						System.out.println();
+						printBoard = true;
+						curColor = flipColor(curColor);
+					}
+					else if(!chessBoard.inCheckmate(curColor))
+					{
+						curColor = flipColor(curColor);
+						printBoard = true;
+						continue;
+					}
+				}
+				catch (Exception c)
+				{
 					System.out.println("Illegal move, try again\n");
 					printBoard = false;
 					continue;
-				}
-				if(chessBoard.inCheck(flipColor(curColor), null))
-				{
-					System.out.println("Check");
-					System.out.println();
-					printBoard = true;
-					curColor = flipColor(curColor);
-				}
-				else if(!chessBoard.inCheckmate(curColor))
-				{
-					curColor = flipColor(curColor);
-					printBoard = true;
-					continue;
-				}
-				else if(chessBoard.inCheckmate(curColor))
-				{
-					System.out.println(flipColor(curColor) + " wins");
-					System.exit(0);
 				}
 			}
 		}
