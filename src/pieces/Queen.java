@@ -7,12 +7,11 @@ public class Queen extends Piece
 	{
 		this.color = color;
 	}
-	public boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
+	public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
-		Piece[][] b = board.getBoard();
 		if(
-			new Rook(color).checkMoveValidity(board, curRow, curCol, newRow, newCol)
-					|| new Bishop(color).checkMoveValidity(board, curRow, curCol, newRow, newCol)
+			new Rook(color).checkMoveValidity(board, b, curRow, curCol, newRow, newCol)
+					|| new Bishop(color).checkMoveValidity(board, b, curRow, curCol, newRow, newCol)
 		)
 			return true;
 		return false;

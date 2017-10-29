@@ -157,7 +157,7 @@ public class Board
 		}
 		Piece curPiece = board[curRow][curCol];
 		if(
-			!curPiece.checkMoveValidity(this, curRow, curCol, newRow, newCol)
+			!curPiece.checkMoveValidity(this, board, curRow, curCol, newRow, newCol)
 					|| !curPiece.getColor().equalsIgnoreCase(color)
 		)
 		{
@@ -190,63 +190,70 @@ public class Board
 		if(inCheck(color, board))
 		{
 			if(
-				!board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol + 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol + 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol - 1)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol)
-						&& !board[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol + 1)
+				!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1,
+								kingCol)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1,
+								kingCol + 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow,
+								kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow,
+								kingCol + 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
+								kingCol - 1)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
+								kingCol)
+						&& !board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1,
+								kingCol + 1)
 				)
 				{
 				return true;
 			}
 			Piece[][] tmpBoard = board.clone();
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol - 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol - 1))
 			{
 				tmpBoard[kingRow - 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					a = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol))
 			{
 				tmpBoard[kingRow - 1][kingCol] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					b = true;
 				;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow - 1, kingCol + 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol + 1))
 			{
 				tmpBoard[kingRow - 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					c = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol - 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow, kingCol - 1))
 			{
 				tmpBoard[kingRow][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					d = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow, kingCol + 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow, kingCol + 1))
 			{
 				tmpBoard[kingRow][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					e = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol - 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol - 1))
 			{
 				tmpBoard[kingRow + 1][kingCol - 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					f = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol))
 			{
 				tmpBoard[kingRow + 1][kingCol] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
 					g = true;
 			}
-			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, kingRow, kingCol, kingRow + 1, kingCol + 1))
+			if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol + 1))
 			{
 				tmpBoard[kingRow + 1][kingCol + 1] = tmpBoard[kingRow][kingCol];
 				if(inCheck(color, tmpBoard))
@@ -299,7 +306,7 @@ public class Board
 					// Check if the other player's can perform a move that will
 					// capture the cur player's king
 					if(
-						curBoard[i][j].checkMoveValidity(this, i, j, kingRow, kingCol)
+						curBoard[i][j].checkMoveValidity(this, curBoard, i, j, kingRow, kingCol)
 								&& !curBoard[i][j].getColor().equalsIgnoreCase(color)
 						)
 						{

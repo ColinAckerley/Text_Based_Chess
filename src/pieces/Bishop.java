@@ -7,9 +7,8 @@ public class Bishop extends Piece
 	{
 		this.color = color;
 	}
-	public boolean checkMoveValidity(Board board, int curRow, int curCol, int newRow, int newCol)
+	public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
 	{
-		Piece[][] b = board.getBoard();
 		int rowDiff = Math.abs(curRow - newRow);
 		int colDiff = Math.abs(curCol - newCol);
 		if(rowDiff != colDiff)
@@ -35,7 +34,7 @@ public class Bishop extends Piece
 		}
 		int col = curCol + colOffset;
 		int row = curRow + rowOffset;
-		while(row != newRow)
+		while (row != newRow)
 		{
 			if(b[row][col] != null) // If space is occupied
 			{
