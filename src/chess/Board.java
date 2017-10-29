@@ -204,123 +204,107 @@ public class Board
 			tmpBoard[kingRow][kingCol] = null; // Remove the king from his
 												// current spot
 			if(inCheck(color, tmpBoard)) // If he is still in check
-			{
-				System.out.println("a is true");
 				a = true; // Part of a chain of booleans to determine
 							// checkmate if he can't move without check
 							// occuring
-			}
 			tmpBoard[kingRow - 1][kingCol - 1] = null; // Reset back to
 														// beginning
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol - 1))
-			a = true;
+			if(inCheck(color, board))
+				a = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow - 1][kingCol] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("b is true");
 				b = true;
-			}
 			tmpBoard[kingRow - 1][kingCol] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol))
-			b = true;
+			if(inCheck(color, board))
+				b = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow - 1, kingCol + 1))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow - 1][kingCol + 1] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("c is true");
 				c = true;
-			}
 			tmpBoard[kingRow - 1][kingCol + 1] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow - 1, kingCol + 1))
-			c = true;
+			if(inCheck(color, board))
+				c = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow, kingCol - 1))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow][kingCol - 1] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("d is true");
 				d = true;
-			}
 			tmpBoard[kingRow][kingCol - 1] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow, kingCol - 1))
-			d = true;
+			if(inCheck(color, board))
+				d = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow, kingCol + 1))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow][kingCol + 1] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("e is true");
 				e = true;
-			}
 			tmpBoard[kingRow][kingCol + 1] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow, kingCol + 1))
-			e = true;
+			if(inCheck(color, board))
+				e = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol - 1))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow + 1][kingCol - 1] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("f is true");
 				f = true;
-			}
 			tmpBoard[kingRow + 1][kingCol - 1] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1, kingCol - 1))
-			f = true;
+			if(inCheck(color, board))
+				f = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow + 1][kingCol] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("g is true");
 				g = true;
-			}
 			tmpBoard[kingRow + 1][kingCol] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1, kingCol))
-			g = true;
+			if(inCheck(color, board))
+				g = true;
 		if(tmpBoard[kingRow][kingCol].checkMoveValidity(this, tmpBoard, kingRow, kingCol, kingRow + 1, kingCol + 1))
 		{
 			Piece curPiece = tmpBoard[kingRow][kingCol];
 			tmpBoard[kingRow + 1][kingCol + 1] = curPiece;
 			tmpBoard[kingRow][kingCol] = null;
 			if(inCheck(color, tmpBoard))
-			{
-				System.out.println("h is true");
 				h = true;
-			}
 			tmpBoard[kingRow + 1][kingCol + 1] = null;
 			tmpBoard[kingRow][kingCol] = curPiece;
 		}
 		else if(!board[kingRow][kingCol].checkMoveValidity(this, board, kingRow, kingCol, kingRow + 1, kingCol + 1))
-			h = true;
+			if(inCheck(color, board))
+				h = true;
 		if(a && b && c && d && e && f && g && h)
 			return true;
 		return false;
