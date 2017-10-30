@@ -2,8 +2,8 @@ package pieces;
 import chess.Board;
 public class Pawn extends Piece
 {
-    String color;
-    boolean hasMoved;
+    private String color;
+    private boolean hasMoved;
     public Pawn(String color)
     {
         this.color = color;
@@ -16,7 +16,7 @@ public class Pawn extends Piece
                 return false;
         int rowDiff = Math.abs(newRow-curRow);
         int colDiff = Math.abs(newCol-curCol);
-        if(color == "black")
+        if(color.equalsIgnoreCase("black"))
         {
             if(newRow <= curRow || colDiff > 1)
             { // pawn can't go backwards, or move over more than one space
@@ -24,7 +24,7 @@ public class Pawn extends Piece
                 return false;
             }
         }
-        if(color == "white")
+        if(color.equalsIgnoreCase("white"))
         {
             if(newRow >= curRow || colDiff > 1)
             { // pawn can't go backwards, or move over more than one space
@@ -32,11 +32,11 @@ public class Pawn extends Piece
                 return false;
             }
         }
-        if(hasMoved == true && rowDiff > 1)
+        if(hasMoved && rowDiff > 1)
         {
             return false;
         }
-        if(hasMoved == false && rowDiff > 2)
+        if(!hasMoved && rowDiff > 2)
         {
             return false;
         }
@@ -51,15 +51,11 @@ public class Pawn extends Piece
         this.hasMoved = true;
         return true;
     }
-    public boolean checkPawnDiag(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
+    private boolean checkPawnDiag(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
-        if((b[newRow][newCol] == null && !enpassantCheck(board, b, curRow, curCol, newRow, newCol)))
-        {
-            return false;
-        }
-        return true;
+        return (b[newRow][newCol] != null || enpassantCheck(board, b, curRow, curCol, newRow, newCol));
     }
-    public boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
+    private boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
         if(b[curRow][curCol].toString().equals("bP") && curRow == 4)
         { // Checks if BLACK piece is in the correct row
@@ -132,13 +128,9 @@ public class Pawn extends Piece
         }
         return false;
     }
-    boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int curRow, int curCol)
+    private boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int curRow, int curCol)
     {
-        if(((board.startingRow == 1) || (board.startingRow == 6)) && board.lastMove.equalsIgnoreCase(curRow+","+curCol))
-        {
-            return true;
-        }
-        return false;
+        return ((board.startingRow == 1) || (board.startingRow == 6)) && board.lastMove.equalsIgnoreCase(curRow+","+curCol);
     }
     public String getColor()
     {

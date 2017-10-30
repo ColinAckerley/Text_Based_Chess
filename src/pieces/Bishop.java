@@ -2,7 +2,7 @@ package pieces;
 import chess.Board;
 public class Bishop extends Piece
 {
-    String color;
+    private String color;
     public Bishop(String color)
     {
         this.color = color;

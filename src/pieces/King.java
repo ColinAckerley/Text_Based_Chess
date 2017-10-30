@@ -2,13 +2,11 @@ package pieces;
 import chess.Board;
 public class King extends Piece
 {
-    String color;
-    boolean hasMoved;
-    boolean hasCastled;
+    private String color;
+    private boolean hasMoved;
     public King(String color)
     {
         this.hasMoved = false;
-        this.hasCastled = false;
         this.color = color;
     }
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
@@ -38,22 +36,18 @@ public class King extends Piece
     {
         return color.charAt(0)+"K";
     }
-    boolean castleCheckValid(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
+    private boolean castleCheckValid(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
         if(b[newRow][newCol] != null)
         {
-            if(b[curRow][curCol].toString().equalsIgnoreCase("bK") && b[newRow][newCol].toString().equalsIgnoreCase("bR") && hasMoved == false && b[newRow][newCol].hasMoved == false && (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black")))
-            {
+            if(b[curRow][curCol].toString().equalsIgnoreCase("bK") && b[newRow][newCol].toString().equalsIgnoreCase("bR") && !hasMoved && !b[newRow][newCol].hasMoved && (!board.inCheck("black", null) && castlePathFree(board, b, curCol, newCol, "black")))
                 return true;
-            }
-            if(b[curRow][curCol].toString().equalsIgnoreCase("wK") && b[newRow][newCol].toString().equalsIgnoreCase("wR") && b[newRow][newCol].hasMoved == false && hasMoved == false && (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white")))
-            {
+            if(b[curRow][curCol].toString().equalsIgnoreCase("wK") && b[newRow][newCol].toString().equalsIgnoreCase("wR") && (!b[newRow][newCol].hasMoved ) && (!hasMoved) && (!board.inCheck("white", null) && castlePathFree(board, b, curCol, newCol, "white")))
                 return true;
-            }
         }
         return false;
     }
-    boolean castlePathFree(Board board, Piece[][] b, int curCol, int newCol, String color)
+    private boolean castlePathFree(Board board, Piece[][] b, int curCol, int newCol, String color)
     {
         if(color.equalsIgnoreCase("black"))
         {

@@ -4,11 +4,11 @@ import pieces.*;
 import java.io.IOException;
 public class Board
 {
-    Piece[][] board = new Piece[8][8];
-    final int SIZE = 8;
+    private Piece[][] board = new Piece[8][8];
+    private final int SIZE = 8;
     public String lastMove;
     public int startingRow;
-    public Board()
+    Board()
     {
         this.initBoard();
     }
@@ -35,9 +35,9 @@ public class Board
         for(int i = 0; i < SIZE; i++)
             board[6][i] = new Pawn("white");
     }
-    public void move(String color, String move) throws IOException
+    void move(String color, String move) throws IOException
     {
-        int curRow = 0, newRow = 0, curCol = 0, newCol = 0;
+        int curRow, newRow, curCol = 0 , newCol = 0;
         String curPos = move.substring(0, 2);
         String newPos = move.substring(3, 5);
         curRow = Integer.parseInt(curPos.substring(1));
@@ -197,17 +197,13 @@ public class Board
     }
     boolean inCheckmate(String color)
     {
-        if(inCheck(color, board) && !canPieceMove(color))
-            return true;
-        return false;
+        return inCheck(color, board) && !canPieceMove(color);
     }
     boolean inStalemate(String color)
     {
-        if(!inCheck(color, board) && !canPieceMove(color))
-            return true;
-        return false;
+        return !inCheck(color, board) && !canPieceMove(color);
     }
-    boolean canPieceMove(String color)
+    private boolean canPieceMove(String color)
     {
         Piece[][] tmpBoard = new Piece[SIZE][];
         Piece curPiece;
@@ -274,7 +270,7 @@ public class Board
         }
         return false;
     }
-    boolean checkPromotion(String color)
+    private boolean checkPromotion(String color)
     {
         if(color.equalsIgnoreCase("white"))
             for(int i = 0; i < SIZE; i++)
@@ -288,7 +284,7 @@ public class Board
                         return true;
         return false;
     }
-    public void promote(String desiredPiece, int newRow, int newCol, String color)
+    private void promote(String desiredPiece, int newRow, int newCol, String color)
     {
         if(checkPromotion(color))
         {
@@ -351,9 +347,5 @@ public class Board
         curBoard += letters;
         curBoard += "\n";
         return curBoard;
-    }
-    public int getSize()
-    {
-        return SIZE;
     }
 }

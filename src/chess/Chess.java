@@ -70,19 +70,17 @@ public class Chess
                     {
                         curColor = flipColor(curColor);
                         printBoard = true;
-                        continue;
                     }
                 }
                 catch(IOException e)
                 {
                     System.out.println("Illegal move, try again\n");
                     printBoard = false;
-                    continue;
                 }
             }
         }
     }
-    public static String flipColor(String s)
+    private static String flipColor(String s)
     {
         if(s.equals("White"))
             return "Black";

@@ -2,7 +2,7 @@ package pieces;
 import chess.Board;
 public class Knight extends Piece
 {
-    String color;
+    private String color;
     public Knight(String color)
     {
         this.color = color;
@@ -14,11 +14,7 @@ public class Knight extends Piece
                 return false;
         int rowDiff = Math.abs(curRow-newRow);
         int colDiff = Math.abs(curCol-newCol);
-        if(rowDiff == 2 && colDiff == 1)
-            return true;
-        if(rowDiff == 1 && colDiff == 2)
-            return true;
-        return false;
+        return rowDiff == 2 && colDiff == 1 || rowDiff == 1 && colDiff == 2;
     }
     public String getColor()
     {

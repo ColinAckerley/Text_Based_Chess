@@ -2,16 +2,14 @@ package pieces;
 import chess.Board;
 public class Rook extends Piece
 {
-    String color;
-    boolean hasMoved;
+    private String color;
     public Rook(String color)
     {
         this.color = color;
-        this.hasMoved = false;
     }
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
-        int rowDiff = Math.abs(curRow-newRow);
+        int rowDiff = Math.abs(curRow-newRow);x
         int colDiff = Math.abs(curCol-newCol);
         if(b[newRow][newCol] != null)
             if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))
