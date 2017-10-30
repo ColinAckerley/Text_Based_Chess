@@ -1,3 +1,8 @@
 out/production/Chess
 /.idea/
 /Chess.iml
+/out/
+/Out/
+.DS_Store
+Out/
+/bin/
