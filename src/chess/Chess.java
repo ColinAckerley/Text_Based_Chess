@@ -29,15 +29,16 @@ public class Chess
                     System.out.println("draw");
                     System.exit(0);
                 }
-                else
-                    drawAvail = false;
             }
             if(input.equalsIgnoreCase("draw?"))
             {
                 drawAvail = true;
+                curColor = flipColor(curColor);
+                printBoard = false;
             }
             else
             {
+                drawAvail = false;
                 try
                 {
                     chessBoard.move(curColor, input);
@@ -58,7 +59,6 @@ public class Chess
                         System.out.println("Check");
                         System.out.println();
                         printBoard = true;
-                        curColor = flipColor(curColor);
                     }
                     if(chessBoard.inStalemate(curColor))
                     {
