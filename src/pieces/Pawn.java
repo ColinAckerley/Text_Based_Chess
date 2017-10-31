@@ -1,5 +1,5 @@
 /*
-    @author Colin Ackerley and Steven Benmoha
+   * @author Colin Ackerley and Steven Benmoha
  */
 package pieces;
 import chess.Board;

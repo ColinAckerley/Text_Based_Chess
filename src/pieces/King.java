@@ -1,3 +1,6 @@
+/*
+   *@author Colin Ackerley and Steven Benmoha
+ */
 package pieces;
 import chess.Board;
 public class King extends Piece
