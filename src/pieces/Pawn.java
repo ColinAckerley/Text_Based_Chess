@@ -175,7 +175,7 @@ public class Pawn extends Piece
     /*
      *@param 
      *@return the string representation of the Pawn piece
-     * Returns the String that represents the Pawn piece "wP"
+     * Returns the String that represents the Pawn piece
   */
     public String toString()
     {
