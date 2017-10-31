@@ -1,5 +1,5 @@
 /*
-    @author Colin Ackerley and Steven Benmoha
+    *@author Colin Ackerley and Steven Benmoha
  */
 package chess;
 import pieces.*;
@@ -12,18 +12,18 @@ public class Board
     public String lastMove;
     public int startingRow;
     /*
-        @param none
-        @return
-        Board constructor
+        *@param none
+        *@return
+        *Board constructor
      */
     Board()
     {
         this.initBoard();
     }
     /*
-        @param
-        @return
-        Called when a new board is created. Puts all the pieces on the board for a new game
+        *@param
+        *@return
+        *Called when a new board is created. Puts all the pieces on the board for a new game
      */
     private void initBoard()
     {
@@ -49,9 +49,9 @@ public class Board
             board[6][i] = new Pawn("white");
     }
     /*
-        @param String color representing who is currently moving, String move representing where the move is being attempted
-        @return
-        Method to move a given piece if the proposed move is valid
+        *@param String color representing who is currently moving, String move representing where the move is being attempted
+        *@return
+        *Method to move a given piece if the proposed move is valid
      */
     void move(String color, String move) throws IOException
     {
@@ -219,27 +219,27 @@ public class Board
         }
     }
     /*
-        @param String color representing which player is being tested for checkmate
-        @return rue if the player of Color is in checkmate, false otherwise
-        Method to see if a given player is in checkmate
+        *@param String color representing which player is being tested for checkmate
+        *@return rue if the player of Color is in checkmate, false otherwise
+        *Method to see if a given player is in checkmate
      */
     boolean inCheckmate(String color)
     {
         return inCheck(color, board) && !canPieceMove(color);
     }
     /*
-        @param String color representing who is being tested for stalemate
-        @return true if the given player is in stalemate, false otherwise
-        Method to check if the given player is in stalemate
+        *@param String color representing who is being tested for stalemate
+        *@return true if the given player is in stalemate, false otherwise
+        *Method to check if the given player is in stalemate
      */
     boolean inStalemate(String color)
     {
         return !inCheck(color, board) && !canPieceMove(color);
     }
     /*
-        @param String color representing which player is being tested for possible moves
-        @return true if the given player has any valid moves that don't result in check, false otherwise
-        Tests all pieces for the given player to see if they can move in any way that will result in that player not being in check
+        *@param String color representing which player is being tested for possible moves
+        *@return true if the given player has any valid moves that don't result in check, false otherwise
+        *Tests all pieces for the given player to see if they can move in any way that will result in that player not being in check
      */
     private boolean canPieceMove(String color)
     {
@@ -266,9 +266,9 @@ public class Board
         return false;
     }
     /*
-        @param String color representing which color's king is being searched for, Piece[][]board representing the board that is being searched
-        @return 1D array of the position of the king for color
-        Method to search for the king for a given color
+        *@param String color representing which color's king is being searched for, Piece[][]board representing the board that is being searched
+        *@return 1D array of the position of the king for color
+        *Method to search for the king for a given color
      */
     private int[] getKingPos(String color, Piece[][] curBoard)
     {
@@ -287,9 +287,9 @@ public class Board
         return kingPos;
     }
     /*
-        @param String color representing which piece is being tested for check
-        @return true if the given color is in check, false otherwise
-        Method to test if a given player is in check or not
+        *@param String color representing which piece is being tested for check
+        *@return true if the given color is in check, false otherwise
+        *Method to test if a given player is in check or not
      */
     public boolean inCheck(String color, Piece[][] curBoard)
     {
@@ -313,8 +313,8 @@ public class Board
         return false;
     }
     /*
-        @param String color representing which color is being checked for a possible promotion
-        @return true if the given color can be promoted, false otherwise
+        *@param String color representing which color is being checked for a possible promotion
+        *@return true if the given color can be promoted, false otherwise
      */
     private boolean checkPromotion(String color)
     {
@@ -331,9 +331,9 @@ public class Board
         return false;
     }
     /*
-        @param String representing the player's desired piece upon promotion, int for which row to put the piece,
-        int for which col to place the piece, String color representing which player is getting the promotion
-        @return
+        *@param String representing the player's desired piece upon promotion, int for which row to put the piece,
+        *int for which col to place the piece, String color representing which player is getting the promotion
+        *@return
      */
     private void promote(String desiredPiece, int newRow, int newCol, String color)
     {
@@ -350,8 +350,8 @@ public class Board
         }
     }
     /*
-        @param
-        @return  string that is a text representation of the current state of the board
+        *@param
+        *@return  string that is a text representation of the current state of the board
      */
     public String toString()
     {

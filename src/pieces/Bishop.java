@@ -1,25 +1,24 @@
 /*
-    @author Colin Ackerley and Steven Benmoha
+    *@author Colin Ackerley and Steven Benmoha
  */
-
 package pieces;
 import chess.Board;
 public class Bishop extends Piece
 {
     private String color;
     /*
-     @param String representing what color to make the Bishop
-     @return
-  */
+        *@param String representing what color to make the Bishop
+        *@return
+     */
     public Bishop(String color)
     {
         this.color = color;
     }
     /*
-   @param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
-   ints representing the cur row and column and the new row and column
-   @return true if the proposed move is valid, false otherwise
-*/
+        *@param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
+        *ints representing the cur row and column and the new row and column
+        *@return true if the proposed move is valid, false otherwise
+    */
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
         if(b[newRow][newCol] != null)
@@ -62,16 +61,16 @@ public class Bishop extends Piece
         return true;
     }
     /*
-      @param
-      @return String with the color of the current Bishop
+      *@param
+      *@return String with the color of the current Bishop
    */
     public String getColor()
     {
         return this.color;
     }
     /*
-       @param
-       @return The string representation of the current Bishop
+       *@param
+       *@return The string representation of the current Bishop
     */
     public String toString()
     {
