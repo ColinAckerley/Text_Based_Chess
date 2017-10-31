@@ -49,7 +49,23 @@ public class Chess
                 drawAvail = false;
                 try
                 {
-                    chessBoard.move(curColor, input);
+                	
+                	if (chessBoard.inCheck(curColor, null)) {
+                   
+                		chessBoard.move(curColor, input);
+                    
+                    if(chessBoard.inCheck(curColor, null)) {
+                    	
+                    	 System.out.println(chessBoard);
+                         System.out.println(flipColor(curColor)+" wins");
+                         System.exit(0);
+    
+                    }
+                	}
+                    
+                	else {chessBoard.move(curColor, input);}
+                                    
+                    
                     if(chessBoard.inCheckmate(curColor))
                     {
                         System.out.println(chessBoard);
