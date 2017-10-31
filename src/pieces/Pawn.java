@@ -111,15 +111,18 @@ public class Pawn extends Piece
                 {
                     return true;
                 }
-                if(curCol != 0 && curCol != 7 && b[curRow][curCol+1] != null)
-                { // non-edge columns with pawn to the
-                    // right
-                    if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(board, b, curRow, curCol+1) && b[curRow][curCol+1].toString().equals("wP"))
-                    {
-                        return true;
-                    }
+                
+            }
+            
+            if(curCol != 0 && curCol != 7 && b[curRow][curCol+1] != null)
+            { // non-edge columns with pawn to the
+                // right
+                if((newRow == curRow+1 && newCol == curCol+1) && lastMoveWasDoubleMove(board, b, curRow, curCol+1) && b[curRow][curCol+1].toString().equals("wP"))
+                {
+                    return true;
                 }
             }
+            
         }
         if(b[curRow][curCol].toString().equals("wP") && curRow == 3)
         {

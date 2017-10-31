@@ -2,7 +2,6 @@
     *@author Colin Ackerley and Steven Benmoha
  */
 package chess;
-import java.io.IOException;
 import java.util.Scanner;
 public class Chess
 {
@@ -96,7 +95,7 @@ public class Chess
                         printBoard = true;
                     }
                 }
-                catch(IOException e)
+                catch(Exception e)
                 {
                     System.out.println("Illegal move, try again\n");
                     printBoard = false;

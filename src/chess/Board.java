@@ -1,11 +1,10 @@
 /*
-    @author Colin Ackerley and Steven Benmoha
+   * @author Colin Ackerley and Steven Benmoha
  */
 package chess;
 
 import pieces.*;
 
-import java.io.IOException;
 
 public class Board {
 	private Piece[][] board = new Piece[8][8];
@@ -57,7 +56,7 @@ public class Board {
 	 * 
 	 * @return Method to move a given piece if the proposed move is valid
 	 */
-	void move(String color, String move) throws IOException {
+	void move(String color, String move) throws Exception {
 		int curRow, newRow, curCol = 0, newCol = 0;
 		String curPos = move.substring(0, 2);
 		String newPos = move.substring(3, 5);
@@ -174,7 +173,7 @@ public class Board {
 		Piece curPiece = board[curRow][curCol];
 		if (!curPiece.checkMoveValidity(this, board, curRow, curCol, newRow, newCol)
 				|| !curPiece.getColor().equalsIgnoreCase(color))
-			throw new IOException();
+			throw new Exception();
 		if (board[newRow][newCol] != null) { // if you are moving to an occupied space
 			if ((board[curRow][curCol].toString().contains("wK") && board[newRow][newCol].toString().contains("wR"))
 					|| (board[curRow][curCol].toString().contains("bK")
@@ -205,7 +204,7 @@ public class Board {
 		if (checkPromotion(color)) {
 			if (move.trim().length() > 5) {
 				if (!checkPromotion(color))
-					throw new IOException();
+					throw new Exception();
 				promote(Character.toString(move.trim().charAt(6)), newRow, newCol, color);
 			} else
 				promote("Q", newRow, newCol, color);
