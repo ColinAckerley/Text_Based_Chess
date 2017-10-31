@@ -9,7 +9,7 @@ public class Rook extends Piece
     }
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
-        int rowDiff = Math.abs(curRow-newRow);x
+        int rowDiff = Math.abs(curRow-newRow);
         int colDiff = Math.abs(curCol-newCol);
         if(b[newRow][newCol] != null)
             if(b[newRow][newCol].getColor().equalsIgnoreCase(b[curRow][curCol].getColor()))

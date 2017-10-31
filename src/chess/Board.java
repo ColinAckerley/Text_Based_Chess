@@ -166,6 +166,14 @@ public class Board
                 board[newRow][newCol] = curPiece; // king in rook's spot
                 board[curRow][curCol] = temp; // rook in king's spot
             }
+            
+            else
+            {
+                board[newRow][newCol] = curPiece;
+                board[curRow][curCol] = null;
+            }
+            
+            
         }
         else if(board[newRow][newCol] == null && (board[curRow][curCol].toString().equalsIgnoreCase("wP") || board[curRow][curCol].toString().equalsIgnoreCase("bP")))
         { // if a piece moves to an empty space
