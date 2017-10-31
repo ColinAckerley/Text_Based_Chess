@@ -1,8 +1,16 @@
+/*
+@author Colin Ackerley and Steven Benmoha
+ */
 package chess;
 import java.io.IOException;
 import java.util.Scanner;
 public class Chess
 {
+    /*
+        Logic for the input to a chess game and what to do based on given input
+        @param default Java main class args
+        @return
+     */
     public static void main(String[] args)
     {
         boolean drawAvail = false;
@@ -80,6 +88,10 @@ public class Chess
             }
         }
     }
+    /*
+    @param String s that is either black or white
+    @return String that is the opposite of the color it was passed. Returns white if s was black, and black if s was white
+     */
     private static String flipColor(String s)
     {
         if(s.equals("White"))
