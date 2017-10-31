@@ -37,7 +37,7 @@ public class Board
     }
     void move(String color, String move) throws IOException
     {
-        int curRow, newRow, curCol = 0 , newCol = 0;
+        int curRow, newRow, curCol = 0, newCol = 0;
         String curPos = move.substring(0, 2);
         String newPos = move.substring(3, 5);
         curRow = Integer.parseInt(curPos.substring(1));
@@ -166,14 +166,11 @@ public class Board
                 board[newRow][newCol] = curPiece; // king in rook's spot
                 board[curRow][curCol] = temp; // rook in king's spot
             }
-            
             else
             {
                 board[newRow][newCol] = curPiece;
                 board[curRow][curCol] = null;
             }
-            
-            
         }
         else if(board[newRow][newCol] == null && (board[curRow][curCol].toString().equalsIgnoreCase("wP") || board[curRow][curCol].toString().equalsIgnoreCase("bP")))
         { // if a piece moves to an empty space
@@ -264,18 +261,12 @@ public class Board
         int kingRow = tmp[0];
         int kingCol = tmp[1];
         for(int i = 0; i < SIZE; i++) // Go through the whole board
-        {
             for(int j = 0; j < SIZE; j++)
-            {
                 if(curBoard[i][j] != null)
-                {
                     // Check if the other player's can perform a move that will
                     // capture the cur player's king
                     if(curBoard[i][j].checkMoveValidity(this, curBoard, i, j, kingRow, kingCol) && !curBoard[i][j].getColor().equalsIgnoreCase(color))
                         return true;
-                }
-            }
-        }
         return false;
     }
     private boolean checkPromotion(String color)
