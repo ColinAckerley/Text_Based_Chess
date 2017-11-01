@@ -1,20 +1,21 @@
-/*
-    *@author Colin Ackerley and Steven Benmoha
+/**
+    *@author Colin Ackerley
+    *@author Steven Benmoha
  */
 package pieces;
 import chess.Board;
 public class Rook extends Piece
 {
     private String color;
-    /*
+    /**
         *@param String representing what color to make the Rook
-        *@return
+        *@return none
      */
     public Rook(String color)
     {
         this.color = color;
     }
-    /*
+    /**
      *@param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
      *ints representing the cur row and column and the new row and column
      *@return true if the proposed move is valid, false otherwise
@@ -53,16 +54,16 @@ public class Rook extends Piece
         hasMoved = true;
         return true;
     }
-    /*
-       *@param
+    /**
+       *@param none
        *@return String with the color of the current Rook
     */
     public String getColor()
     {
         return this.color;
     }
-    /*
-       *@param
+    /**
+       *@param none
        *@return The string representation of the current Rook
     */
     public String toString()

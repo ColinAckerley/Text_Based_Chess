@@ -1,5 +1,6 @@
-/*
-   * @author Colin Ackerley and Steven Benmoha
+/**
+   * @author  Colin Ackerley 
+   * @author  Steven Benmoha
  */
 package chess;
 
@@ -12,7 +13,7 @@ public class Board {
 	public String lastMove;
 	public int startingRow;
 
-	/*
+	/**
 	 * @param none
 	 * 
 	 * @return Board constructor
@@ -21,7 +22,7 @@ public class Board {
 		this.initBoard();
 	}
 
-	/*
+	/**
 	 * @param
 	 * 
 	 * @return Called when a new board is created. Puts all the pieces on the board
@@ -50,7 +51,7 @@ public class Board {
 			board[6][i] = new Pawn("white");
 	}
 
-	/*
+	/**
 	 * @param String color representing who is currently moving, String move
 	 * representing where the move is being attempted
 	 * 
@@ -211,7 +212,7 @@ public class Board {
 		}
 	}
 
-	/*
+	/**
 	 * @param String color representing which player is being tested for checkmate
 	 * 
 	 * @return rue if the player of Color is in checkmate, false otherwise Method to
@@ -221,7 +222,7 @@ public class Board {
 		return inCheck(color, board) && !canPieceMove(color);
 	}
 
-	/*
+	/**
 	 * @param String color representing who is being tested for stalemate
 	 * 
 	 * @return true if the given player is in stalemate, false otherwise Method to
@@ -231,7 +232,7 @@ public class Board {
 		return !inCheck(color, board) && !canPieceMove(color);
 	}
 
-	/*
+	/**
 	 * @param String color representing which player is being tested for possible
 	 * moves
 	 * 
@@ -261,7 +262,7 @@ public class Board {
 		return false;
 	}
 
-	/*
+	/**
 	 * @param String color representing which color's king is being searched for,
 	 * Piece[][]board representing the board that is being searched
 	 * 
@@ -284,7 +285,7 @@ public class Board {
 		return kingPos;
 	}
 
-	/*
+	/**
 	 * @param String color representing which piece is being tested for check
 	 * 
 	 * @return true if the given color is in check, false otherwise Method to test
@@ -311,7 +312,7 @@ public class Board {
 		return false;
 	}
 
-	/*
+	/**
 	 * @param String color representing which color is being checked for a possible
 	 * promotion
 	 * 
@@ -331,7 +332,7 @@ public class Board {
 		return false;
 	}
 
-	/*
+	/**
 	 * @param String representing the player's desired piece upon promotion, int for
 	 * which row to put the piece, int for which col to place the piece, String
 	 * color representing which player is getting the promotion
@@ -351,7 +352,7 @@ public class Board {
 		}
 	}
 
-	/*
+	/**
 	 * @param
 	 * 
 	 * @return string that is a text representation of the current state of the

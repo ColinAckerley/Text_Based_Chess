@@ -1,5 +1,6 @@
-/*
-   * @author Colin Ackerley and Steven Benmoha
+/**
+   * @author Colin Ackerley
+   * @author Steven Benmoha
  */
 package pieces;
 import chess.Board;
@@ -7,21 +8,32 @@ public class Pawn extends Piece
 {
     private String color;
 
-    /*
-       *@param String color 	the color of the Pawn
-       *@return
-       * Pawn constructor
+    /**
+     * 
+     *  Pawn constructor
+       *@param color 	the color of the Pawn
+       *@return none
+       
     */
     public Pawn(String color)
     {
         this.color = color;
 
     }
-    /*
-     *@param board, b, curRow, curCol, newRow, newCol    the Board object 'board', the 2d Piece array b,
-     * the current row and column of the Piece, and the new row and column for it
-     *@return true if it is a valid move for Pawn, false if not
+    /**
      * Checks the validity of the Pawn's requested move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol		the current column of the Piece
+     *@param newRow 	the new row of the Piece
+     *@param newCol		the new column of the Piece
+     * 
+     *
+     *  
+     *@return true if it is a valid move for Pawn, false if not
+     *
   */
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
@@ -65,21 +77,33 @@ public class Pawn extends Piece
         hasMoved = true;
         return true;
     }
-    /*
-     *@param board, b, curRow, curCol, newRow, newCol  -- the Board object 'board', the 2d Piece array b,
-     * the current row and column of the Piece, and the new row and column for it
-     *@return true if it is a valid diagonal move for Pawn, false if not
+    /**
      * Checks the diagonal of the Pawn to see if it is a valid diagonal move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol		the current column of the Piece
+     *@param newRow 	the new row of the Piece
+     *@param newCol		the new column of the Piece
+     *@return true if it is a valid diagonal move for Pawn, false if not
+     * 
   */
     private boolean checkPawnDiag(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
         return (b[newRow][newCol] != null || enpassantCheck(board, b, curRow, curCol, newRow, newCol));
     }
-    /*
-     *@param board, b, curRow, curCol, newRow, newCol  -- the Board object 'board', the 2d Piece array b,
-     * the current row and column of the Piece, and the new row and column for it
-     *@return true if it is an enpassant move
+    /**
      * Checks to see this is an enpassant move and returns true if so, false if not
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol		the current column of the Piece
+     *@param newRow 	the new row of the Piece
+     *@param newCol		the new column of the Piece
+     *@return true if it is an enpassant move
+     * 
   */
     private boolean enpassantCheck(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
@@ -157,28 +181,35 @@ public class Pawn extends Piece
         }
         return false;
     }
-    /*
-     *@param board, b, curRow, curCol -- the Board object 'board', the 2d Piece array b, the current row and column of the Piece
-     *@return true if the previous move was the opponent's pawn's double move
+    /**
      * Checks the last move of the board to see if it was the opponent's pawn's first move as well as a double move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol		the current column of the Piece
+     *@return true if the previous move was the opponent's pawn's double move
+     * 
   */
     private boolean lastMoveWasDoubleMove(Board board, Piece[][] b, int curRow, int curCol)
     {
         return ((board.startingRow == 1) || (board.startingRow == 6)) && board.lastMove.equalsIgnoreCase(curRow+","+curCol);
     }
-    /*
-     *@param 
-     *@return the color of the piece
+    /**
      * Returns the String containing the Pawn's color
+     *@param none
+     *@return the color of the piece
+     * 
   */
     public String getColor()
     {
         return this.color;
     }
-    /*
-     *@param 
+    /**
+     *  Returns the String that represents the Pawn piece
+     *@param none
      *@return the string representation of the Pawn piece
-     * Returns the String that represents the Pawn piece
+     *
   */
     public String toString()
     {
