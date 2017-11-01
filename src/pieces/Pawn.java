@@ -6,7 +6,7 @@ import chess.Board;
 public class Pawn extends Piece
 {
     private String color;
-    private boolean hasMoved;
+
     /*
        *@param String color 	the color of the Pawn
        *@return
@@ -15,7 +15,7 @@ public class Pawn extends Piece
     public Pawn(String color)
     {
         this.color = color;
-        this.hasMoved = false;
+
     }
     /*
      *@param board, b, curRow, curCol, newRow, newCol    the Board object 'board', the 2d Piece array b,
@@ -62,7 +62,7 @@ public class Pawn extends Piece
         {
             return false;
         }
-        this.hasMoved = true;
+        hasMoved = true;
         return true;
     }
     /*
