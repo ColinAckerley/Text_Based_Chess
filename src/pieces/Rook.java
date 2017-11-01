@@ -1,6 +1,6 @@
 /**
-    *@author Colin Ackerley
-    *@author Steven Benmoha
+ * @author Colin Ackerley
+ * @author Steven Benmoha
  */
 package pieces;
 import chess.Board;
@@ -8,8 +8,8 @@ public class Rook extends Piece
 {
     private String color;
     /**
-        *@param String representing what color to make the Rook
-        *@return none
+     *@param String representing what color to make the Rook
+     *@return none
      */
     public Rook(String color)
     {
@@ -19,7 +19,7 @@ public class Rook extends Piece
      *@param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
      *ints representing the cur row and column and the new row and column
      *@return true if the proposed move is valid, false otherwise
-  */
+     */
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
     {
         int rowDiff = Math.abs(curRow-newRow);
@@ -55,17 +55,17 @@ public class Rook extends Piece
         return true;
     }
     /**
-       *@param none
-       *@return String with the color of the current Rook
-    */
+     *@param none
+     *@return String with the color of the current Rook
+     */
     public String getColor()
     {
         return this.color;
     }
     /**
-       *@param none
-       *@return The string representation of the current Rook
-    */
+     *@param none
+     *@return The string representation of the current Rook
+     */
     public String toString()
     {
         return color.charAt(0)+"R";
