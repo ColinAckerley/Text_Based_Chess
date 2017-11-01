@@ -8,8 +8,9 @@ public class Chess
 {
     /**
      *Logic for the input to a chess game and what to do based on given input
-     *@param default Java main class args
-     *@return
+     *
+     *@param args default Java main class args
+     *
      */
     public static void main(String[] args)
     {
@@ -66,12 +67,14 @@ public class Chess
                     if(chessBoard.inCheckmate(curColor))
                     {
                         System.out.println(chessBoard);
+                        System.out.println("Checkmate");
                         System.out.println(flipColor(curColor)+" wins");
                         System.exit(0);
                     }
                     if(chessBoard.inCheckmate(flipColor(curColor)))
                     {
                         System.out.println(chessBoard);
+                        System.out.println("Checkmate");
                         System.out.println(curColor+" wins");
                         System.exit(0);
                     }
@@ -102,7 +105,7 @@ public class Chess
         }
     }
     /**
-     *@param String s that is either black or white
+     *@param s String that is either black or white
      *@return String that is the opposite of the color it was passed. Returns white if s was black, and black if s was white
      */
     private static String flipColor(String s)

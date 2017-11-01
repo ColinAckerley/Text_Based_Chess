@@ -11,7 +11,7 @@ public class Pawn extends Piece
      *
      *  Pawn constructor
      *@param color    the color of the Pawn
-     *@return none
+     *
 
      */
     public Pawn(String color)
@@ -192,7 +192,7 @@ public class Pawn extends Piece
     }
     /**
      * Returns the String containing the Pawn's color
-     *@param none
+     *
      *@return the color of the piece
      *
      */
@@ -202,7 +202,7 @@ public class Pawn extends Piece
     }
     /**
      *  Returns the String that represents the Pawn piece
-     *@param none
+     *
      *@return the string representation of the Pawn piece
      *
      */

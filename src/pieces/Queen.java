@@ -12,8 +12,14 @@ public class Queen extends Piece
         this.color = color;
     }
     /**
-     *@param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
-     *		 ints representing the cur row and column and the new row and column
+     * * Checks the validity of the current Queen's move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol        the current column of the Piece
+     *@param newRow    the new row of the Piece
+     *@param newCol        the new column of the Piece
      *@return true if the proposed move is valid, false otherwise
      */
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
@@ -23,7 +29,9 @@ public class Queen extends Piece
         return false;
     }
     /**
-     *@param
+     *
+     *Gets the color of the current Queen
+     *
      *@return String with the color of the current Queen
      */
     public String getColor()
@@ -31,7 +39,7 @@ public class Queen extends Piece
         return this.color;
     }
     /**
-     *@param
+     * Gets the string representation of the current Queen
      * @return The string representation of the current Queen
      */
     public String toString()

@@ -11,18 +11,16 @@ public class Board
     public String lastMove;
     public int startingRow;
     /**
-     * @param none
-     *
-     * @return Board constructor
+     * 
+     * Board constructor
      */
     Board()
     {
         this.initBoard();
     }
     /**
-     * @param
-     *
-     * @return Called when a new board is created. Puts all the pieces on the board
+     * 
+     * Called when a new board is created. Puts all the pieces on the board
      * for a new game
      */
     private void initBoard()
@@ -49,10 +47,11 @@ public class Board
             board[6][i] = new Pawn("white");
     }
     /**
-     * @param String color representing who is currently moving, String move
+     * @param color String color representing who is currently moving, 
+     * @param move String move
      * representing where the move is being attempted
-     *
-     * @return Method to move a given piece if the proposed move is valid
+     *@throws Exception Throws exception if piece is attempted to move out of bounds or is null
+     *  Method to move a given piece if the proposed move is valid
      */
     void move(String color, String move) throws Exception
     {
@@ -221,17 +220,21 @@ public class Board
         }
     }
     /**
-     * @param String color representing which player is being tested for checkmate
+     * Checks if player is in Checkmate
+     * 
+     * @param color String color representing which player is being tested for checkmate
      *
-     * @return rue if the player of Color is in checkmate, false otherwise Method to
-     * see if a given player is in checkmate
+     * @return true if the player of Color is in checkmate, false otherwise Method to
+     * 			see if a given player is in checkmate
      */
     boolean inCheckmate(String color)
     {
         return inCheck(color, board) && !canPieceMove(color);
     }
     /**
-     * @param String color representing who is being tested for stalemate
+     * Checks if board is in stalemate
+     * 
+     * @param color String color representing who is being tested for stalemate
      *
      * @return true if the given player is in stalemate, false otherwise Method to
      * check if the given player is in stalemate
@@ -241,7 +244,10 @@ public class Board
         return !inCheck(color, board) && !canPieceMove(color);
     }
     /**
-     * @param String color representing which player is being tested for possible
+     * 
+     * Checks if piece can move to get king out of Check
+     * 
+     * @param color String color representing which player is being tested for possible
      * moves
      *
      * @return true if the given player has any valid moves that don't result in
@@ -273,10 +279,12 @@ public class Board
         return false;
     }
     /**
-     * @param String color representing which color's king is being searched for,
-     * Piece[][]board representing the board that is being searched
+     * Gets the king's position on the board
+     * 
+     * @param color String color representing which color's king is being searched for
+     * @param curBoard Piece[][] representing the board that is being searched
      *
-     * @return 1D array of the position of the king for color Method to search for
+     * @return kingPos 1D array of the position of the king for color Method to search for
      * the king for a given color
      */
     private int[] getKingPos(String color, Piece[][] curBoard)
@@ -296,7 +304,10 @@ public class Board
         return kingPos;
     }
     /**
-     * @param String color representing which piece is being tested for check
+     * Checks if King is in Check
+     * 
+     * @param color String color representing which piece is being tested for check
+     * @param curBoard 2d Piece array representing the current board
      *
      * @return true if the given color is in check, false otherwise Method to test
      * if a given player is in check or not
@@ -323,7 +334,9 @@ public class Board
         return false;
     }
     /**
-     * @param String color representing which color is being checked for a possible
+     * Checks to see if there is a pawn that is in position for a promotion
+     * 
+     * @param color String color representing which color is being checked for a possible
      * promotion
      *
      * @return true if the given color can be promoted, false otherwise
@@ -343,11 +356,14 @@ public class Board
         return false;
     }
     /**
-     * @param String representing the player's desired piece upon promotion, int for
-     * which row to put the piece, int for which col to place the piece, String
-     * color representing which player is getting the promotion
+     * Promotes the pawn to the desired Piece
+     * 
+     * @param desiredPiece String representing the player's desired piece upon promotion,
+     * @param newRow int for which row to put the piece
+     * @param newCol int for which col to place the piece,
+     * @param color color representing which player is getting the promotion
      *
-     * @return
+     * 
      */
     private void promote(String desiredPiece, int newRow, int newCol, String color)
     {
@@ -364,9 +380,9 @@ public class Board
         }
     }
     /**
-     * @param
+     * Prints out the board 
      *
-     * @return string that is a text representation of the current state of the
+     * @return curBoard string that is a text representation of the current state of the
      * board
      */
     public String toString()

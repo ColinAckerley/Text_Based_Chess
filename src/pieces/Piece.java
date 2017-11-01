@@ -8,13 +8,20 @@ public abstract class Piece
 {
     boolean hasMoved;
     /**
-     *@param board for the current state of the board class, b representing the current chessboard, and ints for the
-     *current row and column, as well as the proposed row and column
+     * * Checks the validity of the current Piece's move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol        the current column of the Piece
+     *@param newRow    the new row of the Piece
+     *@param newCol        the new column of the Piece
      *@return true if the proposed move is valid, false otherwise
+     *
      */
     public abstract boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol);
     /**
-     * @param
+     * Gets the color of the Piece
      *@return String representing the color of the current piece
      */
     public abstract String getColor();

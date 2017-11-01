@@ -8,16 +8,24 @@ public class Rook extends Piece
 {
     private String color;
     /**
-     *@param String representing what color to make the Rook
-     *@return none
+     *@param color String representing what color to make the Rook
+     *
+     *Rook constructor
+     *
      */
     public Rook(String color)
     {
         this.color = color;
     }
     /**
-     *@param Board board representing an instance of the board class, Piece[][]b representing the current chess board,
-     *ints representing the cur row and column and the new row and column
+     * * Checks the validity of the current Rook's move
+     * 
+     *@param board   the Board object 'board'
+     *@param b     the 2d Piece array b
+     *@param curRow    the current row of the Piece
+     *@param curCol        the current column of the Piece
+     *@param newRow    the new row of the Piece
+     *@param newCol        the new column of the Piece
      *@return true if the proposed move is valid, false otherwise
      */
     public boolean checkMoveValidity(Board board, Piece[][] b, int curRow, int curCol, int newRow, int newCol)
@@ -55,7 +63,7 @@ public class Rook extends Piece
         return true;
     }
     /**
-     *@param none
+     * Gets the color of the current Rook
      *@return String with the color of the current Rook
      */
     public String getColor()
@@ -63,7 +71,7 @@ public class Rook extends Piece
         return this.color;
     }
     /**
-     *@param none
+     *Gets the string representation of the current Rook
      *@return The string representation of the current Rook
      */
     public String toString()
